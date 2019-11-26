@@ -18,6 +18,8 @@ class CreateHallsTable extends Migration
             $table->string('hallName');
             $table->string('address');
             $table->integer('capacity');
+            $table->integer('rows');
+            $table->integer('seatsInRow');
         });
     }
 
