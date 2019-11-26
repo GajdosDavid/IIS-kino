@@ -21,6 +21,7 @@ class CreateEventsTable extends Migration
             $table->integer('price');
             $table->string('type');
             $table->string('eventName');
+            $table->string('description');
             $table->string('genre');
             $table->binary('image');
             $table->string('performer');

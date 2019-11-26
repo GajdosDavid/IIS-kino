@@ -18,10 +18,16 @@ class CreateReservationsTable extends Migration
             $table->date('date');
             $table->boolean('isActive');
             $table->boolean('isPaid');
-            $table->integer('cashierId');
-            $table->integer('eventId');
-            $table->integer('hallId');
-            $table->integer('userId');
+            $table->json('seats');
+            $table->unsignedBigInteger('userId');
+            $table->unsignedBigInteger('eventId');
+            $table->unsignedBigInteger('hallId');
+            $table->foreign('userId')->references('userId')->on('spectators')
+                ->onDelete('cascade');
+            $table->foreign('eventId')->references('eventId')->on('events')
+                ->onDelete('cascade');
+            $table->foreign('hallId')->references('hallId')->on('halls')
+                ->onDelete('cascade');
         });
     }
 

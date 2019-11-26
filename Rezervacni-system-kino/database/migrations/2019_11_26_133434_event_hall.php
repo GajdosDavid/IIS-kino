@@ -14,12 +14,13 @@ class EventHall extends Migration
     public function up()
     {
         Schema::create('event_halls', function (Blueprint $table) {
-            $table->integer('hallId')->unsigned();
-            $table->integer('eventId')->unsigned();
+            $table->bigIncrements('eventHallId');
+            $table->bigInteger('hallId');
+            $table->bigInteger('eventId');
             $table->foreign('hallId')->references('hallId')->on('halls')
                     ->onDelete('cascade');
             $table->foreign('eventId')->references('eventId')->on('events')
-                    ->onDelete('cascade');            
+                    ->onDelete('cascade');
         });
     }
 
