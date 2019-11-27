@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class EventHall extends Migration
+class CreateEventsHallsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -18,9 +18,9 @@ class EventHall extends Migration
             $table->unsignedBigInteger('hallId');
             $table->unsignedBigInteger('eventId');
             $table->foreign('hallId')->references('hallId')->on('halls')
-                    ->onDelete('cascade');
+                ->onDelete('cascade');
             $table->foreign('eventId')->references('eventId')->on('events')
-                    ->onDelete('cascade');
+                ->onDelete('cascade');
         });
     }
 
