@@ -15,8 +15,8 @@ class EventHall extends Migration
     {
         Schema::create('event_halls', function (Blueprint $table) {
             $table->bigIncrements('eventHallId');
-            $table->bigInteger('hallId');
-            $table->bigInteger('eventId');
+            $table->unsignedBigInteger('hallId');
+            $table->unsignedBigInteger('eventId');
             $table->foreign('hallId')->references('hallId')->on('halls')
                     ->onDelete('cascade');
             $table->foreign('eventId')->references('eventId')->on('events')
