@@ -22,7 +22,7 @@ class CreateReservationsTable extends Migration
             $table->unsignedBigInteger('userId');
             $table->unsignedBigInteger('eventId');
             $table->unsignedBigInteger('hallId');
-            $table->foreign('userId')->references('userId')->on('spectators')
+            $table->foreign('userId')->references('userId')->on('users')
                 ->onDelete('cascade');
             $table->foreign('eventId')->references('eventId')->on('events')
                 ->onDelete('cascade');
@@ -38,6 +38,7 @@ class CreateReservationsTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('reservations');
     }
 }
