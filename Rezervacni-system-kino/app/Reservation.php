@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Admins extends Model
+class Reservation extends Model
 {
-    
+    //
 }

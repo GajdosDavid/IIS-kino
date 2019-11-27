@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSpectatorsTable extends Migration
+class CreateUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,21 @@ class CreateSpectatorsTable extends Migration
      */
     public function up()
     {
-        Schema::create('spectators', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('userId');
             $table->string('name');
             $table->string('middleName');
             $table->string('surname');
             $table->string('phone');
             $table->string('mail');
-            //$table->integer('adminId');
+            $table->string('password');
+            /*
+             * 0 : spectator
+             * 1 : cashier
+             * 2 : redactor
+             * 3 : admin
+             */
+            $table->integer('role');
         });
     }
 
@@ -31,6 +38,6 @@ class CreateSpectatorsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('spectators');
+        Schema::dropIfExists('users');
     }
 }
