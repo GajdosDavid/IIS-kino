@@ -1266,6 +1266,7 @@
         },
         {
             "name": "psy/psysh",
+<<<<<<< HEAD
             "version": "v0.9.10",
             "source": {
                 "type": "git",
@@ -1276,6 +1277,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/bobthecow/psysh/zipball/5442009e4ac8ad01ed7e06823350bd75e692257a",
                 "reference": "5442009e4ac8ad01ed7e06823350bd75e692257a",
+=======
+            "version": "v0.9.11",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bobthecow/psysh.git",
+                "reference": "75d9ac1c16db676de27ab554a4152b594be4748e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/75d9ac1c16db676de27ab554a4152b594be4748e",
+                "reference": "75d9ac1c16db676de27ab554a4152b594be4748e",
+>>>>>>> acdb87dadeed7013e8d3dd86af12cc6af2dd2368
                 "shasum": ""
             },
             "require": {
@@ -1336,7 +1349,11 @@
                 "interactive",
                 "shell"
             ],
+<<<<<<< HEAD
             "time": "2019-11-27T19:51:19+00:00"
+=======
+            "time": "2019-11-27T22:44:29+00:00"
+>>>>>>> acdb87dadeed7013e8d3dd86af12cc6af2dd2368
         },
         {
             "name": "ramsey/uuid",

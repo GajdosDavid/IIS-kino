@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEventsHallsTable extends Migration
+class CreatePerformancesHallsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateEventsHallsTable extends Migration
      */
     public function up()
     {
-        Schema::create('event_halls', function (Blueprint $table) {
-            $table->bigIncrements('eventHallId');
+        Schema::create('performances_halls', function (Blueprint $table) {
+            $table->bigIncrements('performanceHallId');
             $table->unsignedBigInteger('hallId');
-            $table->unsignedBigInteger('eventId');
+            $table->unsignedBigInteger('performanceId');
             $table->foreign('hallId')->references('hallId')->on('halls')
                 ->onDelete('cascade');
-            $table->foreign('eventId')->references('eventId')->on('events')
+            $table->foreign('performanceId')->references('performanceId')->on('performances')
                 ->onDelete('cascade');
         });
     }
@@ -32,6 +32,6 @@ class CreateEventsHallsTable extends Migration
     public function down()
     {
         Schema::disableForeignKeyConstraints();
-        Schema::dropIfExists('event_halls');
+        Schema::dropIfExists('performances_halls');
     }
 }
