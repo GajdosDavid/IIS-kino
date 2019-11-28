@@ -1,7 +1,7 @@
 @extends('base')
 
-@section('title', 'Seznam událostí')
-@section('description', 'Výpis všech událostí v administraci.')
+@section('title', 'Seznam představení')
+@section('description', 'Výpis všech představení v administraci.')
 
 @section('content')
     <table class="table table-striped table-bordered table-responsive-md">
@@ -34,7 +34,7 @@
         @empty
             <tr>
                 <td colspan="5" class="text-center">
-                    Nikdo zatím nevytvořil žádnou událost.
+                    Nikdo zatím nevytvořil žádné představení.
                 </td>
             </tr>
         @endforelse
@@ -42,6 +42,6 @@
     </table>
 
     <a href="{{ route('performance.create') }}" class="btn btn-primary">
-        Vytvořit novou událost
+        Vytvořit nové představení
     </a>
 @endsection

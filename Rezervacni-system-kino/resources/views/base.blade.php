@@ -15,6 +15,7 @@
     <h5 class="my-0 mr-md-auto font-weight-normal">{{ env('APP_NAME') }}</h5>
     <nav class="my-2 my-md-0 mr-md-3">
         <a class="p-2 text-dark" href="#">Hlavní stránka</a>
+        <a class="p-2 text-dark" href="{{ route('performance.index') }}">Správa představení</a>
         <a class="p-2 text-dark" href="{{ route('reservation.index') }}">Správa rezervací</a>
         <a class="p-2 text-dark" href="{{ route('user.index') }}">Správa uživatelů</a>
         <a class="p-2 text-dark" href="{{ route('hall.index') }}">Správa sálů</a>

@@ -15,12 +15,12 @@ class CreatePerformancesTable extends Migration
     {
         Schema::create('performances', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('name');
             $table->time('beginning');
             $table->time('end');
             $table->date('date');
             $table->integer('price');
             $table->string('type');
-            $table->string('name');
             $table->string('description');
             $table->string('genre');
             $table->binary('image');

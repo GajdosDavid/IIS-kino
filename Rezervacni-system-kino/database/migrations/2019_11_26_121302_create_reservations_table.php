@@ -16,9 +16,8 @@ class CreateReservationsTable extends Migration
         Schema::create('reservations', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->date('date');
-            $table->boolean('isActive');
-            $table->boolean('isPaid');
-            $table->json('seats');
+            $table->boolean('isPaid')->default(false);
+            $table->string('seats');
             $table->unsignedBigInteger('userId');
             $table->unsignedBigInteger('performanceId');
             $table->unsignedBigInteger('hallId');

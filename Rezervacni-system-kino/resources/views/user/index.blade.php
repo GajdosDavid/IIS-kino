@@ -7,21 +7,18 @@
     <table class="table table-striped table-bordered table-responsive-md">
         <thead>
         <tr>
-            <th>Jméno</th>
             <th>Přijmení</th>
+            <th>Jméno</th>
             <th></th>
         </tr>
         </thead>
         <tbody>
         @forelse ($users as $user)
             <tr>
-                <td>
-                    <a href="{{ route('user.show', ['user' => $user]) }}">
-                        {{ $user->name }}
-                    </a>
-                </td>
                 <td>{{ $user->surname }}</td>
+                <td>{{ $user->firstName }}</td>
                 <td>
+                    <a href="{{ route('user.show', ['user' => $user]) }}">Zobrazit</a>
                     <a href="{{ route('user.edit', ['user' => $user]) }}">Editovat</a>
                     <a href="#" onclick="event.preventDefault(); $('#user-delete-{{ $user->id }}').submit();">Odstranit</a>
 
