@@ -20,7 +20,7 @@ class CreatePerformancesTable extends Migration
             $table->date('date');
             $table->integer('price');
             $table->string('type');
-            $table->string('eventName');
+            $table->string('name');
             $table->string('description');
             $table->string('genre');
             $table->binary('image');
