@@ -6,7 +6,7 @@
 @section('content')
     <h1>Tvorba představení</h1>
 
-    <form action="{{ route('performance.store') }}" method="POST">
+    <form action="{{ route('performance.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
         <div class="form-group">

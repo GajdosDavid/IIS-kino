@@ -23,7 +23,7 @@ class CreatePerformancesTable extends Migration
             $table->string('type');
             $table->string('description');
             $table->string('genre');
-            $table->binary('image');
+            $table->string('image');
             $table->string('performer');
         });
     }

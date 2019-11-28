@@ -44,7 +44,7 @@ class PerformanceController extends Controller
             'type' => ['required', 'min:1', 'max:50'],
             'description' => ['required', 'min:1', 'max:10000'],
             'genre' => ['required', 'min:1', 'max:500'],
-            'image' => ['required',/* 'image'*/],
+            'image' => ['required', 'image', 'max:5000'],
             'performer' => ['required', 'min:1', 'max:500']
         ]);
         //TODO: FOREING KEYS
@@ -58,7 +58,10 @@ class PerformanceController extends Controller
         $performance->name = $request->input('name');
         $performance->description = $request->input('description');
         $performance->genre = $request->input('genre');
-        $performance->image = $request->input('image');
+
+        $performance->image = $imageName = time().'.'.request()->image->getClientOriginalExtension();
+        request()->image->move(public_path('images'), $imageName);
+
         $performance->performer = $request->input('performer');
         $performance->save();
 
