@@ -25,8 +25,8 @@
         </div>
 
         <div class="form-group">
-            <label for="mail">E-mail</label>
-            <input type="text" name="mail" id="mail" class="form-control" value="{{ old('mail') }}" />
+            <label for="email">E-email</label>
+            <input type="text" name="email" id="email" class="form-control" value="{{ old('email') }}" />
         </div>
 
         <div class="form-group">

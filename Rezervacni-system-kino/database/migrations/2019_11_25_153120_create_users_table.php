@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('firstName');
             $table->string('surname');
             $table->string('phone');
-            $table->string('mail');
+            $table->string('email')->unique();
             $table->string('password');
             /*
              * 0 : spectator

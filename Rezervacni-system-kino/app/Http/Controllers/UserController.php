@@ -41,7 +41,7 @@ class UserController extends Controller
             'firstName' => ['required', 'min:1', 'max:30'],
             'surname' => ['required', 'min:1', 'max:30'],
             'phone' => ['required', 'min:4', 'max:20'],
-            'mail' => ['required', 'email'],
+            'email' => ['required', 'email'],
             'password' => ['required', 'min:4', 'max:50'],
             'role' => ['required', 'integer', 'min:0', 'max:3']
         ]);
@@ -50,7 +50,7 @@ class UserController extends Controller
         $user->firstName = $request->input('firstName');
         $user->surname = $request->input('surname');
         $user->phone = $request->input('phone');
-        $user->mail = $request->input('mail');
+        $user->email = $request->input('email');
         $user->password = Hash::make($request->input('password'));
         $user->role = $request->input('role');
         $user->save();
