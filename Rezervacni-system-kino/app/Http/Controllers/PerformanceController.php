@@ -14,7 +14,7 @@ class PerformanceController extends Controller
      */
     public function index()
     {
-        //
+        return view('performance.index', ['performances' => Performance::orderBy('name')->get()]);
     }
 
     /**
