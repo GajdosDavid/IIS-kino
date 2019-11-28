@@ -101,6 +101,12 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        try {
+            $user->delete();
+        } catch (\Exception $exception) {
+            return redirect()->back()->withErrors(['Při odstranění uživatele došlo k chybě.']);
+        }
+
+        return redirect()->route('user.index');
     }
 }

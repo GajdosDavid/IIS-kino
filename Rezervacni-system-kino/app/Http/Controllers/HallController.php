@@ -99,6 +99,12 @@ class HallController extends Controller
      */
     public function destroy(Hall $hall)
     {
-        //
+        try {
+            $hall->delete();
+        } catch (\Exception $exception) {
+            return redirect()->back()->withErrors(['Při odstranění sálu došlo k chybě.']);
+        }
+
+        return redirect()->route('hall.index');
     }
 }

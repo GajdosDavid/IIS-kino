@@ -94,6 +94,12 @@ class ReservationController extends Controller
      */
     public function destroy(Reservation $reservation)
     {
-        //
+        try {
+            $reservation->delete();
+        } catch (\Exception $exception) {
+            return redirect()->back()->withErrors(['Při odstranění rezervace došlo k chybě.']);
+        }
+
+        return redirect()->route('reservation.index');
     }
 }
