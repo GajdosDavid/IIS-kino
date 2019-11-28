@@ -61,7 +61,7 @@ class PerformanceController extends Controller
         $performance->genre = $request->input('genre');
 
         $performance->image = $imageName = time().'.'.request()->image->getClientOriginalExtension();
-        request()->image->move(public_path('images'), $imageName);
+        request()->image->move(storage_path('images'), $imageName);
 
         $performance->performer = $request->input('performer');
         $performance->save();
@@ -123,9 +123,9 @@ class PerformanceController extends Controller
         $performance->description = $request->input('description');
         $performance->genre = $request->input('genre');
 
-        File::delete(public_path('images/'.$performance->image));
+        File::delete(storage_path('images/'.$performance->image));
         $performance->image = $imageName = time().'.'.request()->image->getClientOriginalExtension();
-        request()->image->move(public_path('images'), $imageName);
+        request()->image->move(storage_path('images'), $imageName);
 
         $performance->performer = $request->input('performer');
         $performance->save();
@@ -147,7 +147,7 @@ class PerformanceController extends Controller
             return redirect()->back()->withErrors(['Při odstranění představení došlo k chybě.']);
         }
 
-        File::delete(public_path('images/'.$performance->image));
+        File::delete(storage_path('images/'.$performance->image));
 
         return redirect()->route('performance.index');
     }
