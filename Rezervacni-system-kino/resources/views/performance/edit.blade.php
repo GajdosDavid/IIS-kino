@@ -21,18 +21,18 @@
         </div>
 
         <div class="form-group">
-            <label for="beginning">Začátek</label>
-            <input type="text" name="beginning" id="beginning" class="form-control" value="{{ old('beginning') ?: $performance->beginning }}" />
+            <label for="beginning">Začátek ve formátu H:MM</label>
+            <input type="text" name="beginning" id="beginning" class="form-control" value="{{ old('beginning') ?: date('G:i', strtotime($performance->beginning)) }}" />
         </div>
 
         <div class="form-group">
-            <label for="end">Konec</label>
-            <input type="text" name="end" id="end" class="form-control" value="{{ old('end') ?: $performance->end }}" />
+            <label for="end">Konec ve formátu H:MM</label>
+            <input type="text" name="end" id="end" class="form-control" value="{{ old('end') ?: date('G:i', strtotime($performance->end)) }}" />
         </div>
 
         <div class="form-group">
             <label for="price">Cena</label>
-            <input type="text" name="price" id="price" class="form-control" value="{{ old('price') ?: $performance->price }}" />
+            <input type="text" name="price" id="price" class="form-control" value="{{ old('price') ?: $performance->price }} " />
         </div>
 
         <div class="form-group">
