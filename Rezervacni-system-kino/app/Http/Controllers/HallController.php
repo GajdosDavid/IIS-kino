@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Hall;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class HallController extends Controller
 {
@@ -14,7 +15,7 @@ class HallController extends Controller
      */
     public function index()
     {
-        //
+        return view('hall.index', ['halls' => hall::orderBy('name')->get()]);
     }
 
     /**
@@ -24,7 +25,7 @@ class HallController extends Controller
      */
     public function create()
     {
-        //
+        return view('hall.create');
     }
 
     /**
@@ -35,7 +36,25 @@ class HallController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $this->validate($request, [
+            'name' => ['required', 'min:3', 'max:50'],
+            'address' => ['required', 'min:3', 'max:50'],
+            'rows' => ['required', 'integer', 'min:1', 'max:50'],
+            'seatsInRow' => ['required', 'integer', 'min:1', 'max:50'],
+            'capacity' => ['required', 'integer', Rule::in([$request->input('rows') * $request->input('seatsInRow')])]
+        ]);
+
+        //TODO: FOREING KEYS
+        $hall = new Hall();
+        $hall->name = $request->input('name');
+        $hall->address = $request->input('address');
+        $hall->capacity = $request->input('capacity');
+        $hall->rows = $request->input('rows');
+        $hall->seatsInRow = $request->input('seatsInRow');
+        $hall->save();
+
+        return redirect()->route('hall.index');
     }
 
     /**
@@ -46,7 +65,7 @@ class HallController extends Controller
      */
     public function show(Hall $hall)
     {
-        //
+        return view('hall.show', ['hall' => $hall]);
     }
 
     /**

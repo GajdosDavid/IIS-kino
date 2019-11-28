@@ -14,7 +14,7 @@ class ReservationController extends Controller
      */
     public function index()
     {
-        //
+        return view('reservation.index', ['reservations' => reservation::orderBy('date')->get()]);
     }
 
     /**
@@ -24,7 +24,7 @@ class ReservationController extends Controller
      */
     public function create()
     {
-        //
+        return view('reservation.create');
     }
 
     /**
@@ -35,7 +35,21 @@ class ReservationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'date' => ['required', 'date'],
+            'seats' => ['required']
+        ]);
+
+        //TODO: FOREING KEYS
+        $reservation = new Reservation();
+        $reservation->date = $request->input('date');
+        $reservation->seats = $request->input('seats');
+        $reservation->userId = 1;
+        $reservation->hallId = 1;
+        $reservation->performanceId = 1;
+        $reservation->save();
+
+        return redirect()->route('reservation.index');
     }
 
     /**
@@ -46,7 +60,7 @@ class ReservationController extends Controller
      */
     public function show(Reservation $reservation)
     {
-        //
+        return view('reservation.show', ['reservation' => $reservation]);
     }
 
     /**

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -15,7 +16,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        return view('user.index', ['users' => user::orderBy('surname')->get()]);
     }
 
     /**
@@ -25,7 +26,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('user.create');
     }
 
     /**
@@ -36,7 +37,25 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'firstName' => ['required', 'min:1', 'max:30'],
+            'surname' => ['required', 'min:1', 'max:30'],
+            'phone' => ['required', 'min:4', 'max:20'],
+            'email' => ['required', 'email', 'unique:users'],
+            'password' => ['required', 'min:4', 'max:50'],
+            'role' => ['required', 'integer', 'min:0', 'max:3']
+        ]);
+
+        $user = new User();
+        $user->firstName = $request->input('firstName');
+        $user->surname = $request->input('surname');
+        $user->phone = $request->input('phone');
+        $user->email = $request->input('email');
+        $user->password = Hash::make($request->input('password'));
+        $user->role = $request->input('role');
+        $user->save();
+
+        return redirect()->route('user.index');
     }
 
     /**
@@ -47,7 +66,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
+        return view('user.show', ['user' => $user]);
     }
 
     /**

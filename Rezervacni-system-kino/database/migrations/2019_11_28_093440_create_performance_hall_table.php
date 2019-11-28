@@ -13,8 +13,7 @@ class CreatePerformancesHallsTable extends Migration
      */
     public function up()
     {
-        Schema::create('performances_halls', function (Blueprint $table) {
-            $table->bigIncrements('id');
+        Schema::create('performance_hall', function (Blueprint $table) {
             $table->unsignedBigInteger('hallId');
             $table->unsignedBigInteger('performanceId');
             $table->foreign('hallId')->references('id')->on('halls')
@@ -32,6 +31,6 @@ class CreatePerformancesHallsTable extends Migration
     public function down()
     {
         Schema::disableForeignKeyConstraints();
-        Schema::dropIfExists('performances_halls');
+        Schema::dropIfExists('performance_hall');
     }
 }

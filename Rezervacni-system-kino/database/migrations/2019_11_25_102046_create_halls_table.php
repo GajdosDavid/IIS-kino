@@ -15,7 +15,7 @@ class CreateHallsTable extends Migration
     {
         Schema::create('halls', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('hallName');
+            $table->string('name');
             $table->string('address');
             $table->integer('capacity');
             $table->integer('rows');
