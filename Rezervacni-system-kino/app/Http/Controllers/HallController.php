@@ -14,7 +14,7 @@ class HallController extends Controller
      */
     public function index()
     {
-        //
+        return view('hall.index', ['halls' => hall::orderBy('name')->get()]);
     }
 
     /**
@@ -46,7 +46,7 @@ class HallController extends Controller
      */
     public function show(Hall $hall)
     {
-        //
+        return view('hall.show', ['hall' => $hall]);
     }
 
     /**

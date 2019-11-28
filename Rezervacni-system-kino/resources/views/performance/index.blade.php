@@ -1,7 +1,7 @@
 @extends('base')
 
-@section('title', 'Seznam článků')
-@section('description', 'Výpis všech článků v administraci.')
+@section('title', 'Seznam událostí')
+@section('description', 'Výpis všech událostí v administraci.')
 
 @section('content')
     <table class="table table-striped table-bordered table-responsive-md">

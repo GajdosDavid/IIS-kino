@@ -14,7 +14,7 @@ class ReservationController extends Controller
      */
     public function index()
     {
-        //
+        return view('reservation.index', ['reservations' => reservation::orderBy('date')->get()]);
     }
 
     /**
@@ -46,7 +46,7 @@ class ReservationController extends Controller
      */
     public function show(Reservation $reservation)
     {
-        //
+        return view('reservation.show', ['reservation' => $reservation]);
     }
 
     /**
