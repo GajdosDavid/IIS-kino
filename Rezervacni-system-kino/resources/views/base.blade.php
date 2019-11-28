@@ -35,12 +35,6 @@
 
     @yield('content')
 
-    <footer class="pt-4 my-md-5 border-top">
-        <p>
-            Ukázkový tutoriál pro jednoduchý redakční systém v Laravel frameworku z programátorské sociální sítě
-            <a href="http://www.itnetwork.cz" target="_blank">itnetwork.cz</a>
-        </p>
-    </footer>
 </div>
 
 @stack('scripts')

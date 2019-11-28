@@ -15,13 +15,10 @@
         <tbody>
         @forelse ($performances as $performance)
             <tr>
-                <td>
-                    <a href="{{ route('performance.show', ['performance' => $performance]) }}">
-                        {{ $performance->name }}
-                    </a>
-                </td>
+                <td>{{ $performance->name }}</td>
                 <td>{{ $performance->description }}</td>
                 <td>
+                    <a href="{{ route('performance.show', ['performance' => $performance]) }}">Zobrazit</a>
                     <a href="{{ route('performance.edit', ['performance' => $performance]) }}">Editovat</a>
                     <a href="#" onclick="event.preventDefault(); $('#performance-delete-{{ $performance->id }}').submit();">Odstranit</a>
 
