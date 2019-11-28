@@ -14,7 +14,7 @@ class CreateReservationsTable extends Migration
     public function up()
     {
         Schema::create('reservations', function (Blueprint $table) {
-            $table->bigIncrements('reservationId');
+            $table->bigIncrements('id');
             $table->date('date');
             $table->boolean('isActive');
             $table->boolean('isPaid');
@@ -22,13 +22,12 @@ class CreateReservationsTable extends Migration
             $table->unsignedBigInteger('userId');
             $table->unsignedBigInteger('performanceId');
             $table->unsignedBigInteger('hallId');
-            $table->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP'));
-            $table->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
-            $table->foreign('userId')->references('userId')->on('users')
+            $table->timestamps();
+            $table->foreign('userId')->references('id')->on('users')
                 ->onDelete('cascade');
-            $table->foreign('performanceId')->references('performanceId')->on('performances')
+            $table->foreign('performanceId')->references('id')->on('performances')
                 ->onDelete('cascade');
-            $table->foreign('hallId')->references('hallId')->on('halls')
+            $table->foreign('hallId')->references('id')->on('halls')
                 ->onDelete('cascade');
         });
     }
