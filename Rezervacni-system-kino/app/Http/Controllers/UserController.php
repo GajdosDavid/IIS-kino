@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\Article\StoreRequest;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -35,8 +36,8 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreRequest $request)
-    {/*
+    public function store(Request $request)
+    {
         $this->validate($request, [
             'firstName' => ['required', 'min:1', 'max:30'],
             'surname' => ['required', 'min:1', 'max:30'],
@@ -54,9 +55,6 @@ class UserController extends Controller
         $user->password = Hash::make($request->input('password'));
         $user->role = $request->input('role');
         $user->save();
-*/
-
-        User::create($request->all());
 
         return redirect()->route('user.index');
     }
