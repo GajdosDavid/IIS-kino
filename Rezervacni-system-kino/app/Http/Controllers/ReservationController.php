@@ -71,7 +71,7 @@ class ReservationController extends Controller
      */
     public function edit(Reservation $reservation)
     {
-        //
+        return view('reservation.edit', ['reservation' => $reservation]);
     }
 
     /**
@@ -83,7 +83,21 @@ class ReservationController extends Controller
      */
     public function update(Request $request, Reservation $reservation)
     {
-        //
+
+        $this->validate($request, [
+            'date' => ['required', 'date'],
+            'seats' => ['required']
+        ]);
+
+        //TODO: FOREING KEYS
+        $reservation->date = $request->input('date');
+        $reservation->seats = $request->input('seats');
+        $reservation->userId = 1;
+        $reservation->hallId = 1;
+        $reservation->performanceId = 1;
+        $reservation->save();
+
+        return redirect()->route('reservation.index');
     }
 
     /**
