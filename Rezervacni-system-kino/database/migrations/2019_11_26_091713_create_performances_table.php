@@ -14,7 +14,7 @@ class CreatePerformancesTable extends Migration
     public function up()
     {
         Schema::create('performances', function (Blueprint $table) {
-            $table->bigIncrements('performanceId');
+            $table->bigIncrements('id');
             $table->time('beginning');
             $table->time('end');
             $table->date('date');

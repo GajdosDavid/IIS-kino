@@ -16,8 +16,11 @@ Route::get('/', function () {
 });
 */
 use Illuminate\Support\Facades\Route;
+Route::get('/', function () {
+    return view('welcome');
+});
 
-Route::resource('event', 'EventController');
+Route::resource('performance', 'PerformanceController');
 
 Route::resource('user', 'UserController');
 
