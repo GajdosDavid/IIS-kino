@@ -20,17 +20,16 @@ class CreateReservationsTable extends Migration
             $table->boolean('isPaid');
             $table->json('seats');
             $table->unsignedBigInteger('userId');
-            $table->unsignedBigInteger('eventId');
+            $table->unsignedBigInteger('performanceId');
             $table->unsignedBigInteger('hallId');
             $table->foreign('userId')->references('userId')->on('users')
                 ->onDelete('cascade');
-            $table->foreign('eventId')->references('eventId')->on('events')
+            $table->foreign('performanceId')->references('performanceId')->on('performances')
                 ->onDelete('cascade');
             $table->foreign('hallId')->references('hallId')->on('halls')
                 ->onDelete('cascade');
         });
     }
-
     /**
      * Reverse the migrations.
      *
