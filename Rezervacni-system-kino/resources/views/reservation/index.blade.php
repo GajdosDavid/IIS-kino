@@ -15,13 +15,10 @@
         <tbody>
         @forelse ($reservations as $reservation)
             <tr>
-                <td>
-                    <a href="{{ route('reservation.show', ['reservation' => $reservation]) }}">
-                        {{ $reservation->date }}
-                    </a>
-                </td>
+                <td>{{ $reservation->date }}</td>
                 <td>{{ $reservation->seats }}</td>
                 <td>
+                    <a href="{{ route('reservation.show', ['reservation' => $reservation]) }}">Zobrazit</a>
                     <a href="{{ route('reservation.edit', ['reservation' => $reservation]) }}">Editovat</a>
                     <a href="#" onclick="event.preventDefault(); $('#reservation-delete-{{ $reservation->id }}').submit();">Odstranit</a>
 

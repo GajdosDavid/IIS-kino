@@ -24,7 +24,7 @@ class PerformanceController extends Controller
      */
     public function create()
     {
-        //
+        return view('performance.create');
     }
 
     /**
@@ -35,7 +35,37 @@ class PerformanceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => ['required', 'min:1', 'max:300'],
+            'date' => ['required', 'date'],
+            'beginning' => ['required', 'date_format:G:i'],
+            'end' => ['required', 'date_format:G:i', 'after:beginning'],
+            'price' => ['required', 'integer', 'min:1'],
+            'type' => ['required', 'min:1', 'max:50'],
+            'description' => ['required', 'min:1', 'max:10000'],
+            'genre' => ['required', 'min:1', 'max:500'],
+            'image' => ['required', 'image', 'max:5000'],
+            'performer' => ['required', 'min:1', 'max:500']
+        ]);
+        //TODO: FOREING KEYS
+        $performance = new Performance();
+        $performance->name = $request->input('name');
+        $performance->date = $request->input('date');
+        $performance->beginning = $request->input('beginning');
+        $performance->end = $request->input('end');
+        $performance->price = $request->input('price');
+        $performance->type = $request->input('type');
+        $performance->name = $request->input('name');
+        $performance->description = $request->input('description');
+        $performance->genre = $request->input('genre');
+
+        $performance->image = $imageName = time().'.'.request()->image->getClientOriginalExtension();
+        request()->image->move(public_path('images'), $imageName);
+
+        $performance->performer = $request->input('performer');
+        $performance->save();
+
+        return redirect()->route('performance.index');
     }
 
     /**

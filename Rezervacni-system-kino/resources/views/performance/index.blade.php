@@ -1,7 +1,7 @@
 @extends('base')
 
-@section('title', 'Seznam událostí')
-@section('description', 'Výpis všech událostí v administraci.')
+@section('title', 'Seznam představení')
+@section('description', 'Výpis všech představení v administraci.')
 
 @section('content')
     <table class="table table-striped table-bordered table-responsive-md">
@@ -15,13 +15,10 @@
         <tbody>
         @forelse ($performances as $performance)
             <tr>
-                <td>
-                    <a href="{{ route('performance.show', ['performance' => $performance]) }}">
-                        {{ $performance->name }}
-                    </a>
-                </td>
+                <td>{{ $performance->name }}</td>
                 <td>{{ $performance->description }}</td>
                 <td>
+                    <a href="{{ route('performance.show', ['performance' => $performance]) }}">Zobrazit</a>
                     <a href="{{ route('performance.edit', ['performance' => $performance]) }}">Editovat</a>
                     <a href="#" onclick="event.preventDefault(); $('#performance-delete-{{ $performance->id }}').submit();">Odstranit</a>
 
@@ -34,7 +31,7 @@
         @empty
             <tr>
                 <td colspan="5" class="text-center">
-                    Nikdo zatím nevytvořil žádnou událost.
+                    Nikdo zatím nevytvořil žádné představení.
                 </td>
             </tr>
         @endforelse
@@ -42,6 +39,6 @@
     </table>
 
     <a href="{{ route('performance.create') }}" class="btn btn-primary">
-        Vytvořit novou událost
+        Vytvořit nové představení
     </a>
 @endsection
