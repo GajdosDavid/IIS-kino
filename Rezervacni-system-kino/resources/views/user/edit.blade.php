@@ -8,7 +8,7 @@
         <h1>K této stránce nemáte přístup</h1>
     @else
         @if (Auth::user()->id == $user->id)
-            <h1 xmlns="http://www.w3.org/1999/html">Editace uživatele {{ $user->firstName. " ".$user->surname }}</h1>
+            <h1>Editace uživatele {{ $user->firstName. " ".$user->surname }}</h1>
 
             <form action="{{ route('user.update', ['user' => $user]) }}" method="POST">
                 @csrf
