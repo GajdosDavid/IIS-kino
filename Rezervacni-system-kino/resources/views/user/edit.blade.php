@@ -4,7 +4,7 @@
 @section('description', 'Editor pro editaci uživatelů pro Admina.')
 
 @section('content')
-    <h1>Editace uživatele {{ $user->firstName. " ".$user->surname }}</h1>
+    <h1 xmlns="http://www.w3.org/1999/html">Editace uživatele {{ $user->firstName. " ".$user->surname }}</h1>
 
     <form action="{{ route('user.update', ['user' => $user]) }}" method="POST">
         @csrf
@@ -27,11 +27,12 @@
 
         <div class="form-group">
             <label for="role">Role</label>
-            <select name="role" id="role" class="form-control" />
+            <select name="role" id="role" class="form-control" >
                 <option value="0" {{ ($user->role == 0) ? "selected" : ""}}>Divák</option>
                 <option value="1" {{ ($user->role == 1) ? "selected" : ""}}>Pokladní</option>
                 <option value="2" {{ ($user->role == 2) ? "selected" : ""}}>Redaktor</option>
                 <option value="3" {{ ($user->role == 3) ? "selected" : ""}}>Admin</option>
+            </select>
         </div>
 
         <button type="submit" class="btn btn-primary">Uložit uživatele</button>
