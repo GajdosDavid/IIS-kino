@@ -1,4 +1,4 @@
-@extends('base')
+@extends('layouts.app')
 
 @section('title', 'Tvorba uživatele')
 @section('description', 'Editor pro vytvoření nového uživatele.')
@@ -41,7 +41,6 @@
                 <option value="1">Pokladní</option>
                 <option value="2">Redaktor</option>
                 <option value="3">Admin</option>
-            </select>
         </div>
 
         <button type="submit" class="btn btn-primary">Vytvořit uživatele</button>

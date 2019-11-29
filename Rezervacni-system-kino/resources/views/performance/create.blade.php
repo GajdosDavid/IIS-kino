@@ -1,4 +1,4 @@
-@extends('base')
+@extends('layouts.app')
 
 @section('title', 'Tvorba představení')
 @section('description', 'Editor pro vytvoření nového představení.')

@@ -1,4 +1,4 @@
-@extends('base')
+@extends('layouts.app')
 
 @section('title', 'Kino jak sviňa')
 @section('description', 'Kino pro pravé brňáky')

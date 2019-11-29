@@ -1,4 +1,4 @@
-@extends('base')
+@extends('layouts.app')
 
 @section('title', 'Editace představení ' . $performance->title)
 @section('description', 'Editor pro editaci představení.')

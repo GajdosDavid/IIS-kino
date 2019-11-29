@@ -1,4 +1,4 @@
-@extends('base')
+@extends('layouts.app')
 
 @section('title', 'Editace rezervace ' . $reservation->title)
 @section('description', 'Editor pro editaci rezervace.')

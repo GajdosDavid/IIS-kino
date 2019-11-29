@@ -1,4 +1,4 @@
-@extends('base')
+@extends('layouts.app')
 
 @section('title', 'Tvorba rezervace')
 @section('description', 'Editor pro vytvoření nové rezervace.')

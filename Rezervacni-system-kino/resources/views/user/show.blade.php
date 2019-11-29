@@ -1,4 +1,4 @@
-@extends('base')
+@extends('layouts.app')
 
 @section('title', $user->firstName)
 @section('description', $user->surname)

@@ -1,4 +1,4 @@
-@extends('base')
+@extends('layouts.app')
 
 @section('title', 'Editace uživatelů pro Admina ' . $user->firstName . " ".$user->surname)
 @section('description', 'Editor pro editaci uživatelů pro Admina.')
@@ -32,7 +32,6 @@
                 <option value="1" {{ ($user->role == 1) ? "selected" : ""}}>Pokladní</option>
                 <option value="2" {{ ($user->role == 2) ? "selected" : ""}}>Redaktor</option>
                 <option value="3" {{ ($user->role == 3) ? "selected" : ""}}>Admin</option>
-            </select>
         </div>
 
         <button type="submit" class="btn btn-primary">Uložit uživatele</button>

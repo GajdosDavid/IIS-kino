@@ -1,4 +1,4 @@
-@extends('base')
+@extends('layouts.app')
 
 @section('title', 'Seznam uživatelů')
 @section('description', 'Výpis všech uživatelů v administraci.')
