@@ -61,7 +61,7 @@ class PerformanceController extends Controller
         $performance->genre = $request->input('genre');
 
         $performance->image = $imageName = time().'.'.request()->image->getClientOriginalExtension();
-        request()->image->move(storage_path('images'), $imageName);
+        request()->image->move(storage_path('/app/public'), $imageName);
 
         $performance->performer = $request->input('performer');
         $performance->save();
@@ -109,7 +109,7 @@ class PerformanceController extends Controller
             'type' => ['required', 'min:1', 'max:50'],
             'description' => ['required', 'min:1', 'max:10000'],
             'genre' => ['required', 'min:1', 'max:500'],
-            'image' => ['required', 'image', 'max:5000'],
+            'image' => [ 'image', 'max:5000'],
             'performer' => ['required', 'min:1', 'max:500']
         ]);
 
@@ -123,9 +123,11 @@ class PerformanceController extends Controller
         $performance->description = $request->input('description');
         $performance->genre = $request->input('genre');
 
-        File::delete(storage_path('images/'.$performance->image));
-        $performance->image = $imageName = time().'.'.request()->image->getClientOriginalExtension();
-        request()->image->move(storage_path('images'), $imageName);
+        if ($request->image){
+            File::delete(storage_path('/app/public/'.$performance->image));
+            $performance->image = $imageName = time().'.'.request()->image->getClientOriginalExtension();
+            request()->image->move(storage_path('/app/public'), $imageName);
+        }
 
         $performance->performer = $request->input('performer');
         $performance->save();
@@ -147,7 +149,7 @@ class PerformanceController extends Controller
             return redirect()->back()->withErrors(['Při odstranění představení došlo k chybě.']);
         }
 
-        File::delete(storage_path('images/'.$performance->image));
+        File::delete(storage_path('/app/publicimages/'.$performance->image));
 
         return redirect()->route('performance.index');
     }

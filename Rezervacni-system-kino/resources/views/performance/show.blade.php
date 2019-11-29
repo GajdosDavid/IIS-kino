@@ -5,5 +5,9 @@
 
 @section('content')
     <h1>{{ $performance->name }}</h1>
-    {!! $performance->description !!}
+    <br>
+
+    <img src="/storage/{{$performance->image}}" alt="$performance->name" height="500">
+    <br>
+    <p>{!! $performance->description !!}</p>
 @endsection
