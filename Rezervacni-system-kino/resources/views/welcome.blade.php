@@ -6,17 +6,19 @@
 @section('content')
     <h1 class="text-center mb-4">Jednoduchý redakční systém v Laravel</h1>
 
-        <article class="article mb-5">
+    @forelse ($performances as $performance)
+        <div class="performance mb-5">
             <header>
-
+                <h2>
+                    <a href="{{ route('performance.show', ['performance' => $performance]) }}">{{ $performance->name }}</a>
+                </h2>
             </header>
+            <img src="/storage/{{$performance->image}}" alt="$performance->name" height="300">
 
-            <p class="article-content mb-1">test</p>
+            <p class="performance-content mb-1">{{ $performance->description }}</p>
 
-            <footer>
-                <p class="small text-secondary">
-                    Naposledy upraveno
-                </p>
-            </footer>
-        </article>
+        </div>
+    @empty
+        <p>Zatím se zde nenachází žádná představení.</p>
+    @endforelse
 @endsection

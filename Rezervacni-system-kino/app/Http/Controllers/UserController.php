@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use App\Http\Requests\Article\StoreRequest;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -77,7 +78,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return view('user.edit', ['user' => $user]);
     }
 
     /**
@@ -89,7 +90,23 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $this->validate($request, [
+            'firstName' => ['required', 'min:1', 'max:30'],
+            'surname' => ['required', 'min:1', 'max:30'],
+            'phone' => ['required', 'min:4', 'max:20'],
+            'email' => ['required', 'email', 'unique:users'],
+            'role' => ['required', 'integer', 'min:0', 'max:3']
+        ]);
+
+        $user->firstName = $request->input('firstName');
+        $user->surname = $request->input('surname');
+        $user->phone = $request->input('phone');
+        $user->email = $request->input('email');
+        $user->password = Hash::make($request->input('password'));
+        $user->role = $request->input('role');
+        $user->save();
+
+        return redirect()->route('user.index');
     }
 
     /**
@@ -100,6 +117,12 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        try {
+            $user->delete();
+        } catch (\Exception $exception) {
+            return redirect()->back()->withErrors(['Při odstranění uživatele došlo k chybě.']);
+        }
+
+        return redirect()->route('user.index');
     }
 }
