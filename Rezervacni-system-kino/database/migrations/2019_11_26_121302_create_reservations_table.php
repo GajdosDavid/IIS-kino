@@ -18,7 +18,7 @@ class CreateReservationsTable extends Migration
             $table->date('date');
             $table->boolean('isPaid')->default(false);
             $table->string('seats');
-            $table->unsignedBigInteger('userId');
+            $table->unsignedBigInteger('userId')->nullable();
             $table->unsignedBigInteger('performanceId');
             $table->unsignedBigInteger('hallId');
             $table->timestamps();
@@ -28,6 +28,9 @@ class CreateReservationsTable extends Migration
                 ->onDelete('cascade');
             $table->foreign('hallId')->references('id')->on('halls')
                 ->onDelete('cascade');
+            $table->string('firstName')->nullable();
+            $table->string('surname')->nullable();
+            $table->string('email')->nullable();
         });
     }
     /**
