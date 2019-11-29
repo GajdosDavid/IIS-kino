@@ -1,10 +1,10 @@
 @extends('base')
 
-@section('title', 'Jednoduchý redakční systém v Laravel')
-@section('description', 'Ukázkový tutoriál pro jednoduchý redakční systém v Laravel frameworku z programátorské sociální sítě itnetwork.cz')
+@section('title', 'Kino jak sviňa')
+@section('description', 'Kino pro pravé brňáky')
 
 @section('content')
-    <h1 class="text-center mb-4">Jednoduchý redakční systém v Laravel</h1>
+    <h1 class="text-center mb-4">Kino jak sviňa</h1>
 
     @forelse ($performances as $performance)
         <div class="performance mb-5">
