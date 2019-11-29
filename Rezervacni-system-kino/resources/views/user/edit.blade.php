@@ -37,6 +37,15 @@
 
         <button type="submit" class="btn btn-primary">Uložit uživatele</button>
     </form>
+    <br>
+    <button class="btn btn-danger" onclick="$('#user-delete-{{ $user->id }}').submit();">Smazat účet</button>
+
+    <form action="{{ route('user.destroy', ['user' => $user]) }}" method="POST" id="user-delete-{{ $user->id }}" class="d-none">
+        @csrf
+        @method('DELETE')
+    </form>
+
+
 @endsection
 
 @push('scripts')
