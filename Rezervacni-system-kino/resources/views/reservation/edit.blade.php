@@ -4,25 +4,33 @@
 @section('description', 'Editor pro editaci rezervace.')
 
 @section('content')
-    <h1>Editace představení {{ $reservation->title }}</h1>
+    @guest
+        <h1>K této stránce nemáte přístup</h1>
+    @else
+        @if (Auth::user()->role == 3 || Auth::user()->role == 1 )
+            <h1>Editace představení {{ $reservation->title }}</h1>
 
-    <form action="{{ route('reservation.update', ['reservation' => $reservation]) }}" method="POST">
-        @csrf
-        @method('PUT')
+            <form action="{{ route('reservation.update', ['reservation' => $reservation]) }}" method="POST">
+                @csrf
+                @method('PUT')
 
-        <div class="form-group">
-            <label for="date">Datum</label>
-            <input type="text" name="date" id="date" class="form-control" value="{{ old('date') ?: $reservation->date }}" />
-        </div>
+                <div class="form-group">
+                    <label for="date">Datum</label>
+                    <input type="text" name="date" id="date" class="form-control" value="{{ old('date') ?: $reservation->date }}" />
+                </div>
 
-        <div class="form-group">
-            <label for="seats">Sedačky</label>
-            <input type="text" name="seats" id="seats" class="form-control" value="{{ old('seats') ?: $reservation->seats }}" />
-        </div>
+                <div class="form-group">
+                    <label for="seats">Sedačky</label>
+                    <input type="text" name="seats" id="seats" class="form-control" value="{{ old('seats') ?: $reservation->seats }}" />
+                </div>
 
 
-        <button type="submit" class="btn btn-primary">Uložit rezervaci</button>
-    </form>
+                <button type="submit" class="btn btn-primary">Uložit rezervaci</button>
+            </form>
+        @else
+            <h1>K této stránce nemáte přístup</h1>
+        @endif
+    @endguest
 @endsection
 
 @push('scripts')
