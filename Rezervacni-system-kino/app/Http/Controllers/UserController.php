@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Exception;
 use Illuminate\Http\Request;
-use App\Http\Requests\Article\StoreRequest;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -94,15 +94,12 @@ class UserController extends Controller
             'firstName' => ['required', 'min:1', 'max:30'],
             'surname' => ['required', 'min:1', 'max:30'],
             'phone' => ['required', 'min:4', 'max:20'],
-            'email' => ['required', 'email', 'unique:users'],
             'role' => ['required', 'integer', 'min:0', 'max:3']
         ]);
 
         $user->firstName = $request->input('firstName');
         $user->surname = $request->input('surname');
         $user->phone = $request->input('phone');
-        $user->email = $request->input('email');
-        $user->password = Hash::make($request->input('password'));
         $user->role = $request->input('role');
         $user->save();
 
@@ -119,7 +116,7 @@ class UserController extends Controller
     {
         try {
             $user->delete();
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return redirect()->back()->withErrors(['Při odstranění uživatele došlo k chybě.']);
         }
 

@@ -26,13 +26,13 @@
         </div>
 
         <div class="form-group">
-            <label for="email">E-email</label>
-            <input type="text" name="email" id="email" class="form-control" value="{{ old('email') ?: $user->email }}" />
-        </div>
-
-        <div class="form-group">
             <label for="role">Role</label>
-            <input type="text" name="role" id="role" class="form-control" value="{{ old('role') ?: $user->role }}"/>
+            <select name="role" id="role" class="form-control" />
+                <option value="0" {{ ($user->role == 0) ? "selected" : ""}}>Divák</option>
+                <option value="1" {{ ($user->role == 1) ? "selected" : ""}}>Pokladní</option>
+                <option value="2" {{ ($user->role == 2) ? "selected" : ""}}>Redaktor</option>
+                <option value="3" {{ ($user->role == 3) ? "selected" : ""}}>Admin</option>
+            </select>
         </div>
 
         <button type="submit" class="btn btn-primary">Uložit uživatele</button>

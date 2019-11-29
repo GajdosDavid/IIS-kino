@@ -36,7 +36,12 @@
 
         <div class="form-group">
             <label for="role">Role</label>
-            <input type="text" name="role" id="role" class="form-control" value="{{ old('role') }}"/>
+            <select name="role" id="role" class="form-control" />
+                <option value="0">Divák</option>
+                <option value="1">Pokladní</option>
+                <option value="2">Redaktor</option>
+                <option value="3">Admin</option>
+            </select>
         </div>
 
         <button type="submit" class="btn btn-primary">Vytvořit uživatele</button>
