@@ -26,3 +26,11 @@ Route::resource('user', 'UserController');
 Route::resource('hall', 'HallController');
 
 Route::resource('reservation', 'ReservationController');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

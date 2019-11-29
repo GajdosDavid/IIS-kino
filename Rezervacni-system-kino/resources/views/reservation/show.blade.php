@@ -1,4 +1,4 @@
-@extends('base')
+@extends('layouts.app')
 
 @section('title', $reservation->date)
 @section('description', $reservation->seats)

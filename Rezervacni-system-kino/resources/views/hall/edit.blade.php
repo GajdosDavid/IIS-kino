@@ -1,4 +1,4 @@
-@extends('base')
+@extends('layouts.app')
 
 @section('title', 'Editace sálů ' . $hall->title)
 @section('description', 'Editor pro editaci sálů.')
