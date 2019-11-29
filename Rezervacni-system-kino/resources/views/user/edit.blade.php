@@ -1,10 +1,10 @@
 @extends('base')
 
-@section('title', 'Editace uživatelů pro Admina ' . $user->title)
+@section('title', 'Editace uživatelů pro Admina ' . $user->firstName . " ".$user->surname)
 @section('description', 'Editor pro editaci uživatelů pro Admina.')
 
 @section('content')
-    <h1>Editace uživatele {{ $user->title }}</h1>
+    <h1>Editace uživatele {{ $user->firstName. " ".$user->surname }}</h1>
 
     <form action="{{ route('user.update', ['user' => $user]) }}" method="POST">
         @csrf
