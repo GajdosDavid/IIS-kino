@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Performance;
 use Illuminate\Http\Request;
+use File;
 
 class PerformanceController extends Controller
 {
@@ -60,7 +61,7 @@ class PerformanceController extends Controller
         $performance->genre = $request->input('genre');
 
         $performance->image = $imageName = time().'.'.request()->image->getClientOriginalExtension();
-        request()->image->move(public_path('images'), $imageName);
+        request()->image->move(storage_path('/app/public'), $imageName);
 
         $performance->performer = $request->input('performer');
         $performance->save();
@@ -87,7 +88,7 @@ class PerformanceController extends Controller
      */
     public function edit(Performance $performance)
     {
-        //
+        return view('performance.edit', ['performance' => $performance]);
     }
 
     /**
@@ -99,7 +100,39 @@ class PerformanceController extends Controller
      */
     public function update(Request $request, Performance $performance)
     {
-        //
+        $this->validate($request, [
+            'name' => ['required', 'min:1', 'max:300'],
+            'date' => ['required', 'date'],
+            'beginning' => ['required', 'date_format:G:i'],
+            'end' => ['required', 'date_format:G:i', 'after:beginning'],
+            'price' => ['required', 'integer', 'min:1'],
+            'type' => ['required', 'min:1', 'max:50'],
+            'description' => ['required', 'min:1', 'max:10000'],
+            'genre' => ['required', 'min:1', 'max:500'],
+            'image' => [ 'image', 'max:5000'],
+            'performer' => ['required', 'min:1', 'max:500']
+        ]);
+
+        $performance->name = $request->input('name');
+        $performance->date = $request->input('date');
+        $performance->beginning = $request->input('beginning');
+        $performance->end = $request->input('end');
+        $performance->price = $request->input('price');
+        $performance->type = $request->input('type');
+        $performance->name = $request->input('name');
+        $performance->description = $request->input('description');
+        $performance->genre = $request->input('genre');
+
+        if ($request->image){
+            File::delete(storage_path('/app/public/'.$performance->image));
+            $performance->image = $imageName = time().'.'.request()->image->getClientOriginalExtension();
+            request()->image->move(storage_path('/app/public'), $imageName);
+        }
+
+        $performance->performer = $request->input('performer');
+        $performance->save();
+
+        return redirect()->route('performance.index');
     }
 
     /**
@@ -110,6 +143,14 @@ class PerformanceController extends Controller
      */
     public function destroy(Performance $performance)
     {
-        //
+        try {
+            $performance->delete();
+        } catch (\Exception $exception) {
+            return redirect()->back()->withErrors(['Při odstranění představení došlo k chybě.']);
+        }
+
+        File::delete(storage_path('/app/publicimages/'.$performance->image));
+
+        return redirect()->route('performance.index');
     }
 }

@@ -26,7 +26,7 @@ class CreateUsersTable extends Migration
              * 2 : redactor
              * 3 : admin
              */
-            $table->integer('role');
+            $table->integer('role')->default(0);
             $table->timestamps();
         });
     }

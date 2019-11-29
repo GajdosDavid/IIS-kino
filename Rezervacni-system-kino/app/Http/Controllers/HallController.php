@@ -76,7 +76,7 @@ class HallController extends Controller
      */
     public function edit(Hall $hall)
     {
-        //
+        return view('hall.edit', ['hall' => $hall]);
     }
 
     /**
@@ -88,7 +88,23 @@ class HallController extends Controller
      */
     public function update(Request $request, Hall $hall)
     {
-        //
+        $this->validate($request, [
+            'name' => ['required', 'min:3', 'max:50'],
+            'address' => ['required', 'min:3', 'max:50'],
+            'rows' => ['required', 'integer', 'min:1', 'max:50'],
+            'seatsInRow' => ['required', 'integer', 'min:1', 'max:50'],
+            'capacity' => ['required', 'integer', Rule::in([$request->input('rows') * $request->input('seatsInRow')])]
+        ]);
+
+        //TODO: FOREING KEYS
+        $hall->name = $request->input('name');
+        $hall->address = $request->input('address');
+        $hall->capacity = $request->input('capacity');
+        $hall->rows = $request->input('rows');
+        $hall->seatsInRow = $request->input('seatsInRow');
+        $hall->save();
+
+        return redirect()->route('hall.index');
     }
 
     /**
@@ -99,6 +115,12 @@ class HallController extends Controller
      */
     public function destroy(Hall $hall)
     {
-        //
+        try {
+            $hall->delete();
+        } catch (\Exception $exception) {
+            return redirect()->back()->withErrors(['Při odstranění sálu došlo k chybě.']);
+        }
+
+        return redirect()->route('hall.index');
     }
 }
