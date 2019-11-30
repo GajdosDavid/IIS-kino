@@ -72,9 +72,7 @@ class PerformanceController extends Controller
 
         $performance->save();
 
-        foreach ($request->hall as $key => $hallId) {
-            $performance->halls()->attach($hallId);
-        }
+        $performance->halls()->attach($request->hall);
 
         return redirect()->route('performance.index');
     }
@@ -98,7 +96,7 @@ class PerformanceController extends Controller
      */
     public function edit(Performance $performance)
     {
-        return view('performance.edit', ['performance' => $performance]);
+        return view('performance.edit', ['performance' => $performance, 'halls' => Hall::orderBy('name')->get() ]);
     }
 
     /**
@@ -141,6 +139,8 @@ class PerformanceController extends Controller
 
         $performance->performer = $request->input('performer');
         $performance->save();
+
+        $performance->halls()->sync($request->hall);
 
         return redirect()->route('performance.index');
     }
