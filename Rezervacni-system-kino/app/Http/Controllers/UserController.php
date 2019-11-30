@@ -118,13 +118,15 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        $role = Auth::guard('web')->User()->role;
+
         try {
             $user->delete();
         } catch (Exception $exception) {
             return redirect()->back()->withErrors(['Při odstranění uživatele došlo k chybě.']);
         }
 
-        if (Auth::guard('web')->User()->role == 3){
+        if ( $role == 3){
             return redirect()->route('user.index');
         }
         else{

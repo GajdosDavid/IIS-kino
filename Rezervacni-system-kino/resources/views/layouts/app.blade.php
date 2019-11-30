@@ -70,7 +70,7 @@
                                         {{ __('Upravit profil') }}
                                     </a>
 
-                                    <a class="dropdown-item" href="{{ route('password.update') }}">
+                                    <a class="dropdown-item" href="{{ route('change.password', Auth::user() )}}">
                                         {{ __('Změnit heslo') }}
                                     </a>
 

@@ -10,11 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-/*
-Route::get('/', function () {
-    return view('welcome');
-});
-*/
+
 use Illuminate\Support\Facades\Route;
 
 Route::get('', 'WelcomeController');
@@ -26,6 +22,9 @@ Route::resource('user', 'UserController');
 Route::resource('hall', 'HallController');
 
 Route::resource('reservation', 'ReservationController');
+
+Route::get('change-password', 'ChangePasswordController@index');
+Route::post('change-password', 'ChangePasswordController@store')->name('change.password');
 
 Auth::routes();
 
