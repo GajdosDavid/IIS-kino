@@ -24,12 +24,12 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="beginning">Začátek</label>
+                    <label for="beginning">Začátek ve formátu H:MM</label>
                     <input type="text" name="beginning" id="beginning" class="form-control" value="{{ old('beginning') }}" />
                 </div>
 
                 <div class="form-group">
-                    <label for="end">Konec</label>
+                    <label for="end">Konec ve formátu H:MM</label>
                     <input type="text" name="end" id="end" class="form-control" value="{{ old('end') }}" />
                 </div>
 
