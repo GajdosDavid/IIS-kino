@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Hall;
 use App\Performance;
 use App\Reservation;
 use App\User;
@@ -21,7 +22,10 @@ class ReservationController extends Controller
      */
     public function index()
     {
-        return view('reservation.index', ['reservations' => reservation::orderBy('created_at')->get()]);
+        $user = User::get();
+        $performance = Performance::get();
+        $hall = Hall::get();
+        return view('reservation.index', ['reservations' => reservation::orderBy('created_at')->get(), 'performances' => $performance, 'users' => $user, 'halls' => $hall] );
     }
 
     public function myReservations()

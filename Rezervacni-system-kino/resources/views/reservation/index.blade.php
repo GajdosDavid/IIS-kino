@@ -11,6 +11,12 @@
             <table class="table table-striped table-bordered table-responsive-md">
                 <thead>
                 <tr>
+                    <th>Příjmení</th>
+                    <th>Jméno</th>
+                    <th>Představení</th>
+                    <th>Sál</th>
+                    <th>datum</th>
+                    <th>začátek</th>
                     <th>sedadla</th>
                     <th></th>
                 </tr>
@@ -18,6 +24,12 @@
                 <tbody>
                 @forelse ($reservations as $reservation)
                     <tr>
+                        <td>{{ $users->keyBy($reservation->userId)->first()->surname }}</td>
+                        <td>{{ $users->keyBy($reservation->userId)->first()->firstName }}</td>
+                        <td>{{ $performances->keyBy($reservation->performanceId)->first()->name }}</td>
+                        <td>{{ $halls->keyBy($reservation->hallId)->first()->name }}</td>
+                        <td>{{ $performances->keyBy($reservation->performanceId)->first()->date }}</td>
+                        <td>{{ date('G:i', strtotime( $performances->keyBy($reservation->performanceId)->first()->beginning )) }}</td>
                         <td>{{ $reservation->seats }}</td>
                         <td>
                             <a href="{{ route('reservation.show', ['reservation' => $reservation]) }}">Zobrazit</a>
