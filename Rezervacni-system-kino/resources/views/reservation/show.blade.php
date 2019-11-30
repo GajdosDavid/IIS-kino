@@ -4,6 +4,10 @@
 @section('description', $reservation->seats)
 
 @section('content')
-    <h1>{{ $reservation->date }}</h1>
-    {!! $reservation->seats !!}
+    <p>sedadla:{{ $reservation->seats }}</p>
+    <p>zaplaceno: {!! $reservation->is_paid !!}</p>
+
+    <p>Údaje o neregistrovanem uživateli:
+    <p>Jmeno: {{ $reservation->first_name.' '.$reservation->surname}}</p>
+    <p>Email: {{ $reservation->email}}</p>
 @endsection

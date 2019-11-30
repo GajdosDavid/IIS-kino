@@ -11,16 +11,24 @@
             <table class="table table-striped table-bordered table-responsive-md">
                 <thead>
                 <tr>
-                    <th>Jméno</th>
-                    <th>Popisek</th>
+                    <th>Jméno díla</th>
+                    <th>Datum</th>
+                    <th>Začátek</th>
+                    <th>Sály</th>
                     <th></th>
                 </tr>
                 </thead>
                 <tbody>
                 @forelse ($performances as $performance)
                     <tr>
-                        <td>{{ $performance->name }}</td>
-                        <td>{{ $performance->description }}</td>
+                        <td>{{ $pieces->find($performance->piece_id)->name}}</td>
+                        <td>{{ $performance->date }}</td>
+                        <td>{{ date('G:i', strtotime($performance->beginning)) }}</td>
+                        <td>
+                            @foreach ($performance->halls as $hall)
+                                {{ $hall->name}}<br>
+                            @endforeach
+                        </td>
                         <td>
                             <a href="{{ route('performance.show', ['performance' => $performance]) }}">Zobrazit</a>
                             <a href="{{ route('performance.edit', ['performance' => $performance]) }}">Editovat</a>

@@ -15,19 +15,19 @@ class CreateReservationsTable extends Migration
     {
         Schema::create('reservations', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->boolean('isPaid')->default(false);
+            $table->boolean('is_paid')->default(false);
             $table->string('seats');
-            $table->unsignedBigInteger('userId')->nullable();
-            $table->unsignedBigInteger('performanceId');
-            $table->unsignedBigInteger('hallId');
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('performance_id');
+            $table->unsignedBigInteger('hall_id');
             $table->timestamps();
-            $table->foreign('userId')->references('id')->on('users')
+            $table->foreign('user_id')->references('id')->on('users')
                 ->onDelete('cascade');
-            $table->foreign('performanceId')->references('id')->on('performances')
+            $table->foreign('performance_id')->references('id')->on('performances')
                 ->onDelete('cascade');
-            $table->foreign('hallId')->references('id')->on('halls')
+            $table->foreign('hall_id')->references('id')->on('halls')
                 ->onDelete('cascade');
-            $table->string('firstName')->nullable();
+            $table->string('first_name')->nullable();
             $table->string('surname')->nullable();
             $table->string('email')->nullable();
         });

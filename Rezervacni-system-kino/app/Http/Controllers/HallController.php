@@ -3,15 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Hall;
+use Exception;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\View\View;
 
 class HallController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function index()
     {
@@ -21,7 +25,7 @@ class HallController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function create()
     {
@@ -31,18 +35,18 @@ class HallController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @param Request $request
+     * @return RedirectResponse
      */
     public function store(Request $request)
     {
 
         $this->validate($request, [
             'name' => ['required', 'min:3', 'max:50'],
-            'address' => ['required', 'min:3', 'max:50'],
+            'address' => ['nullable', 'min:3', 'max:50'],
             'rows' => ['required', 'integer', 'min:1', 'max:50'],
-            'seatsInRow' => ['required', 'integer', 'min:1', 'max:50'],
-            'capacity' => ['required', 'integer', Rule::in([$request->input('rows') * $request->input('seatsInRow')])]
+            'seats_in_row' => ['required', 'integer', 'min:1', 'max:50'],
+            'capacity' => ['required', 'integer', Rule::in([$request->input('rows') * $request->input('seats_in_row')])]
         ]);
 
         //TODO: FOREING KEYS
@@ -51,7 +55,7 @@ class HallController extends Controller
         $hall->address = $request->input('address');
         $hall->capacity = $request->input('capacity');
         $hall->rows = $request->input('rows');
-        $hall->seatsInRow = $request->input('seatsInRow');
+        $hall->seats_in_row = $request->input('seats_in_row');
         $hall->save();
 
         return redirect()->route('hall.index');
@@ -60,8 +64,8 @@ class HallController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Hall  $hall
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @param Hall $hall
+     * @return Factory|View
      */
     public function show(Hall $hall)
     {
@@ -71,8 +75,8 @@ class HallController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Hall  $hall
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @param Hall $hall
+     * @return Factory|View
      */
     public function edit(Hall $hall)
     {
@@ -82,18 +86,18 @@ class HallController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Hall  $hall
-     * @return \Illuminate\Http\RedirectResponse
+     * @param Request $request
+     * @param Hall $hall
+     * @return RedirectResponse
      */
     public function update(Request $request, Hall $hall)
     {
         $this->validate($request, [
             'name' => ['required', 'min:3', 'max:50'],
-            'address' => ['required', 'min:3', 'max:50'],
+            'address' => ['nullable', 'min:3', 'max:50'],
             'rows' => ['required', 'integer', 'min:1', 'max:50'],
-            'seatsInRow' => ['required', 'integer', 'min:1', 'max:50'],
-            'capacity' => ['required', 'integer', Rule::in([$request->input('rows') * $request->input('seatsInRow')])]
+            'seats_in_row' => ['required', 'integer', 'min:1', 'max:50'],
+            'capacity' => ['required', 'integer', Rule::in([$request->input('rows') * $request->input('seats_in_row')])]
         ]);
 
         //TODO: FOREING KEYS
@@ -101,7 +105,7 @@ class HallController extends Controller
         $hall->address = $request->input('address');
         $hall->capacity = $request->input('capacity');
         $hall->rows = $request->input('rows');
-        $hall->seatsInRow = $request->input('seatsInRow');
+        $hall->seats_in_row = $request->input('seats_in_row');
         $hall->save();
 
         return redirect()->route('hall.index');
@@ -110,14 +114,14 @@ class HallController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Hall  $hall
-     * @return \Illuminate\Http\RedirectResponse
+     * @param Hall $hall
+     * @return RedirectResponse
      */
     public function destroy(Hall $hall)
     {
         try {
             $hall->delete();
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return redirect()->back()->withErrors(['Při odstranění sálu došlo k chybě.']);
         }
 

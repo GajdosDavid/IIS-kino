@@ -24,12 +24,12 @@
                 <tbody>
                 @forelse ($reservations as $reservation)
                     <tr>
-                        <td>{{ $users->find($reservation->userId)->surname }}</td>
-                        <td>{{ $users->find($reservation->userId)->firstName }}</td>
-                        <td>{{ $performances->find($reservation->performanceId)->name }}</td>
-                        <td>{{ $halls->find($reservation->hallId)->name }}</td>
-                        <td>{{ $performances->find($reservation->performanceId)->date }}</td>
-                        <td>{{ date('G:i', strtotime( $performances->find($reservation->performanceId)->beginning )) }}</td>
+                        <td>{{ $users->find($reservation->user_id)->surname }}</td>
+                        <td>{{ $users->find($reservation->user_id)->first_name }}</td>
+                        <td>{{ $performances->find($reservation->performance_id)->piece->name }}</td>
+                        <td>{{ $halls->find($reservation->hall_id)->name }}</td>
+                        <td>{{ $performances->find($reservation->performance_id)->date }}</td>
+                        <td>{{ date('G:i', strtotime( $performances->find($reservation->performance_id)->beginning )) }}</td>
                         <td>{{ $reservation->seats }}</td>
                         <td>
                             <a href="{{ route('reservation.show', ['reservation' => $reservation]) }}">Zobrazit</a>

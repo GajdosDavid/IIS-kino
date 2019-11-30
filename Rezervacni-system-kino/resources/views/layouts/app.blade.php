@@ -41,11 +41,11 @@
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('Přihlášení') }}</a>
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Registrace') }}</a>
                                 </li>
                             @endif
                         @else
@@ -55,6 +55,7 @@
                             @endif
                             @if (Auth::user()->role == 3 || Auth::user()->role == 2 )
                                 <a class="p-2 text-dark" href="{{ route('performance.index') }}">Správa představení</a>
+                                <a class="p-2 text-dark" href="{{ route('piece.index') }}">Správa kulturních děl</a>
                                 <a class="p-2 text-dark" href="{{ route('hall.index') }}">Správa sálů</a>
                             @endif
                             @if (Auth::user()->role == 3 || Auth::user()->role == 1 )
@@ -62,7 +63,7 @@
                             @endif
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->firstName.' '.Auth::user()->surname }} <span class="caret"></span>
+                                    {{ Auth::user()->first_name.' '.Auth::user()->surname }} <span class="caret"></span>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">

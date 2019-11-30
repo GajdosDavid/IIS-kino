@@ -14,6 +14,11 @@ class Performance extends Model
         return $this->hasMany(Reservation::class);
     }
 
+    public function piece()
+    {
+        return $this->belongsTo(Piece::class);
+    }
+
     public function halls()
     {
         return $this->belongsToMany(Hall::class, 'performance_hall');

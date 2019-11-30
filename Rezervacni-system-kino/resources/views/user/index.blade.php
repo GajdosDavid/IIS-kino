@@ -20,7 +20,7 @@
                 @forelse ($users as $user)
                     <tr>
                         <td>{{ $user->surname }}</td>
-                        <td>{{ $user->firstName }}</td>
+                        <td>{{ $user->first_name }}</td>
                         <td>
                             <a href="{{ route('user.show', ['user' => $user]) }}">Zobrazit</a>
                             <a href="{{ route('user.edit', ['user' => $user]) }}">Editovat</a>

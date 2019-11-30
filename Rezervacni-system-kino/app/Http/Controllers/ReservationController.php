@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Hall;
 use App\Performance;
+use App\piece;
 use App\Reservation;
 use App\User;
 use Exception;
@@ -24,15 +25,28 @@ class ReservationController extends Controller
     {
         $user = User::get();
         $performance = Performance::get();
+        $piece = Piece::get();
         $hall = Hall::get();
-        return view('reservation.index', ['reservations' => reservation::orderBy('created_at')->get(), 'performances' => $performance, 'users' => $user, 'halls' => $hall] );
+        return view('reservation.index', [
+            'reservations' => reservation::orderBy('created_at')->get(),
+            'performances' => $performance,
+            'users' => $user,
+            'halls' => $hall,
+            'pieces' => $piece
+        ] );
+
     }
 
     public function myReservations()
     {
         $performance = Performance::get();
+        $hall = Hall::get();
         $user = User::find(Auth::guard('web')->User()->id);
-        return view('reservation.myReservations', [ 'reservations' => reservation::where('userId', $user->id)->orderBy('created_at')->get(), 'performances' => $performance] );
+        return view('reservation.myReservations', [
+            'reservations' => reservation::where('user_id', $user->id)->orderBy('created_at')->get(),
+            'performances' => $performance,
+            'halls' => $hall
+        ] );
     }
     /**
      * Show the form for creating a new resource.
@@ -59,9 +73,9 @@ class ReservationController extends Controller
         //TODO: FOREING KEYS
         $reservation = new Reservation();
         $reservation->seats = $request->input('seats');
-        $reservation->userId = 1;
-        $reservation->hallId = 1;
-        $reservation->performanceId = 1;
+        $reservation->user_id = 1;
+        $reservation->hall_id = 1;
+        $reservation->performance_id = 1;
         $reservation->save();
 
         return redirect()->route('reservation.index');
@@ -104,9 +118,9 @@ class ReservationController extends Controller
 
         //TODO: FOREING KEYS
         $reservation->seats = $request->input('seats');
-        $reservation->userId = 1;
-        $reservation->hallId = 1;
-        $reservation->performanceId = 1;
+        $reservation->user_id = 1;
+        $reservation->hall_id = 1;
+        $reservation->performance_id = 1;
         $reservation->save();
 
         return redirect()->route('reservation.index');
@@ -131,7 +145,7 @@ class ReservationController extends Controller
 
     public function pay(Request $request, Reservation $reservation)
     {
-        $reservation->update(['isPaid' => '1']);
+        $reservation->update(['is_paid' => '1']);
 
         return redirect('/');
     }

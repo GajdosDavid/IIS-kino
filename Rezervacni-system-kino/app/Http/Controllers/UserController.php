@@ -43,16 +43,16 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'firstName' => ['required', 'min:1', 'max:30'],
+            'first_name' => ['required', 'min:1', 'max:30'],
             'surname' => ['required', 'min:1', 'max:30'],
-            'phone' => ['required', 'min:4', 'max:20'],
+            'phone' => ['nullable', 'min:4', 'max:20'],
             'email' => ['required', 'email', 'unique:users'],
             'password' => ['required', 'string', 'min:4', 'confirmed'],
-            'role' => ['required', 'integer', 'min:0', 'max:3']
+            'role' => ['integer', 'min:0', 'max:3']
         ]);
 
         $user = new User();
-        $user->firstName = $request->input('firstName');
+        $user->first_name = $request->input('first_name');
         $user->surname = $request->input('surname');
         $user->phone = $request->input('phone');
         $user->email = $request->input('email');
@@ -95,19 +95,29 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $this->validate($request, [
-            'firstName' => ['required', 'min:1', 'max:30'],
+            'first_name' => ['required', 'min:1', 'max:30'],
             'surname' => ['required', 'min:1', 'max:30'],
-            'phone' => ['required', 'min:4', 'max:20'],
-            'role' => ['required', 'integer', 'min:0', 'max:3']
+            'phone' => ['nullable', 'min:4', 'max:20'],
+            'role' => ['integer', 'min:0', 'max:3']
         ]);
 
-        $user->firstName = $request->input('firstName');
+        $user->first_name = $request->input('first_name');
         $user->surname = $request->input('surname');
         $user->phone = $request->input('phone');
-        $user->role = $request->input('role');
+
+        if($request->input('role')){
+            $user->role = $request->input('role');
+        }
         $user->save();
 
-        return redirect()->route('user.index');
+
+        $role = Auth::guard('web')->User()->role;
+        if ( $role == 3){
+            return redirect()->route('user.index');
+        }
+        else{
+            return redirect('/');
+        }
     }
 
     /**
