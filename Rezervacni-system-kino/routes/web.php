@@ -22,6 +22,7 @@ Route::resource('user', 'UserController');
 Route::resource('hall', 'HallController');
 
 Route::resource('reservation', 'ReservationController');
+Route::get('myReservations', 'ReservationController@myReservations')->name('reservation.myReservations');
 
 Route::get('change-password', 'ChangePasswordController@index');
 Route::post('change-password', 'ChangePasswordController@store')->name('change.password');

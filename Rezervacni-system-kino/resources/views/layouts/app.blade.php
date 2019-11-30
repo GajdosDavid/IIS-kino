@@ -49,6 +49,7 @@
                                 </li>
                             @endif
                         @else
+                            <a class="p-2 text-dark" href="{{ route('reservation.myReservations') }}">Moje rezervace</a>
                             @if (Auth::user()->role == 3)
                                 <a class="p-2 text-dark" href="{{ route('user.index') }}">Správa uživatelů</a>
                             @endif
