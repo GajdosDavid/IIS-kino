@@ -15,11 +15,6 @@
                 @method('PUT')
 
                 <div class="form-group">
-                    <label for="date">Datum</label>
-                    <input type="text" name="date" id="date" class="form-control" value="{{ old('date') ?: $reservation->date }}" />
-                </div>
-
-                <div class="form-group">
                     <label for="seats">Sedačky</label>
                     <input type="text" name="seats" id="seats" class="form-control" value="{{ old('seats') ?: $reservation->seats }}" />
                 </div>

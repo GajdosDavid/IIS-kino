@@ -49,13 +49,11 @@ class ReservationController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'date' => ['required', 'date'],
             'seats' => ['required']
         ]);
 
         //TODO: FOREING KEYS
         $reservation = new Reservation();
-        $reservation->date = $request->input('date');
         $reservation->seats = $request->input('seats');
         $reservation->userId = 1;
         $reservation->hallId = 1;
@@ -98,12 +96,10 @@ class ReservationController extends Controller
     {
 
         $this->validate($request, [
-            'date' => ['required', 'date'],
             'seats' => ['required']
         ]);
 
         //TODO: FOREING KEYS
-        $reservation->date = $request->input('date');
         $reservation->seats = $request->input('seats');
         $reservation->userId = 1;
         $reservation->hallId = 1;

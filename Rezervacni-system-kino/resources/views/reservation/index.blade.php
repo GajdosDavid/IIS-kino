@@ -11,7 +11,6 @@
             <table class="table table-striped table-bordered table-responsive-md">
                 <thead>
                 <tr>
-                    <th>datum</th>
                     <th>sedadla</th>
                     <th></th>
                 </tr>
@@ -19,7 +18,6 @@
                 <tbody>
                 @forelse ($reservations as $reservation)
                     <tr>
-                        <td>{{ $reservation->date }}</td>
                         <td>{{ $reservation->seats }}</td>
                         <td>
                             <a href="{{ route('reservation.show', ['reservation' => $reservation]) }}">Zobrazit</a>
