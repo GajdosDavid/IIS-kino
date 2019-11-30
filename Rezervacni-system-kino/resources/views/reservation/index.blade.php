@@ -24,12 +24,12 @@
                 <tbody>
                 @forelse ($reservations as $reservation)
                     <tr>
-                        <td>{{ $users->keyBy($reservation->userId)->first()->surname }}</td>
-                        <td>{{ $users->keyBy($reservation->userId)->first()->firstName }}</td>
-                        <td>{{ $performances->keyBy($reservation->performanceId)->first()->name }}</td>
-                        <td>{{ $halls->keyBy($reservation->hallId)->first()->name }}</td>
-                        <td>{{ $performances->keyBy($reservation->performanceId)->first()->date }}</td>
-                        <td>{{ date('G:i', strtotime( $performances->keyBy($reservation->performanceId)->first()->beginning )) }}</td>
+                        <td>{{ $users->find($reservation->userId)->surname }}</td>
+                        <td>{{ $users->find($reservation->userId)->firstName }}</td>
+                        <td>{{ $performances->find($reservation->performanceId)->name }}</td>
+                        <td>{{ $halls->find($reservation->hallId)->name }}</td>
+                        <td>{{ $performances->find($reservation->performanceId)->date }}</td>
+                        <td>{{ date('G:i', strtotime( $performances->find($reservation->performanceId)->beginning )) }}</td>
                         <td>{{ $reservation->seats }}</td>
                         <td>
                             <a href="{{ route('reservation.show', ['reservation' => $reservation]) }}">Zobrazit</a>
