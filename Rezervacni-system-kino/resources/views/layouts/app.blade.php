@@ -38,11 +38,6 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
-
-                        <a class="p-2 text-dark" href="{{ route('performance.index') }}">Správa představení</a>
-                        <a class="p-2 text-dark" href="{{ route('reservation.index') }}">Správa rezervací</a>
-                        <a class="p-2 text-dark" href="{{ route('user.index') }}">Správa uživatelů</a>
-                        <a class="p-2 text-dark" href="{{ route('hall.index') }}">Správa sálů</a>
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
@@ -54,6 +49,17 @@
                                 </li>
                             @endif
                         @else
+                            <a class="p-2 text-dark" href="{{ route('reservation.myReservations') }}">Moje rezervace</a>
+                            @if (Auth::user()->role == 3)
+                                <a class="p-2 text-dark" href="{{ route('user.index') }}">Správa uživatelů</a>
+                            @endif
+                            @if (Auth::user()->role == 3 || Auth::user()->role == 2 )
+                                <a class="p-2 text-dark" href="{{ route('performance.index') }}">Správa představení</a>
+                                <a class="p-2 text-dark" href="{{ route('hall.index') }}">Správa sálů</a>
+                            @endif
+                            @if (Auth::user()->role == 3 || Auth::user()->role == 1 )
+                                <a class="p-2 text-dark" href="{{ route('reservation.index') }}">Správa rezervací</a>
+                            @endif
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->firstName.' '.Auth::user()->surname }} <span class="caret"></span>
@@ -65,10 +71,14 @@
                                         {{ __('Upravit profil') }}
                                     </a>
 
+                                    <a class="dropdown-item" href="{{ route('change.password', Auth::user() )}}">
+                                        {{ __('Změnit heslo') }}
+                                    </a>
+
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ __('Odhlásit se') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

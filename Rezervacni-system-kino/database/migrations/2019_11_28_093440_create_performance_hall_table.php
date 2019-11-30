@@ -14,11 +14,11 @@ class CreatePerformanceHallTable extends Migration
     public function up()
     {
         Schema::create('performance_hall', function (Blueprint $table) {
-            $table->unsignedBigInteger('hallId');
-            $table->unsignedBigInteger('performanceId');
-            $table->foreign('hallId')->references('id')->on('halls')
+            $table->unsignedBigInteger('hall_id');
+            $table->unsignedBigInteger('performance_id');
+            $table->foreign('hall_id')->references('id')->on('halls')
                 ->onDelete('cascade');
-            $table->foreign('performanceId')->references('id')->on('performances')
+            $table->foreign('performance_id')->references('id')->on('performances')
                 ->onDelete('cascade');
         });
     }
