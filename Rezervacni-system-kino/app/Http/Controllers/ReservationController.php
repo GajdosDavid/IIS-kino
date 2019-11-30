@@ -98,7 +98,6 @@ class ReservationController extends Controller
      */
     public function update(Request $request, Reservation $reservation)
     {
-
         $this->validate($request, [
             'seats' => ['required']
         ]);
@@ -128,5 +127,12 @@ class ReservationController extends Controller
         }
 
         return redirect()->route('reservation.index');
+    }
+
+    public function pay(Request $request, Reservation $reservation)
+    {
+        $reservation->update(['isPaid' => '1']);
+
+        return redirect('/');
     }
 }

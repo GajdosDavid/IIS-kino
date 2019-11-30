@@ -10,6 +10,8 @@ class Reservation extends Model
         'seats' => 'array'
     ];
 
+    protected $fillable = ['seats','isPaid', 'firstName', 'surname', 'email'];
+
     public function user()
     {
         return $this->belongsTo(User::class);

@@ -26,6 +26,13 @@
                     <td>{{ $reservation->seats }}</td>
                     <td>
                         <a href="{{ route('reservation.show', ['reservation' => $reservation]) }}">Zobrazit</a>
+
+                        @if(!$reservation->isPaid)
+                            <form id="pay" action="{{ route('reservation.pay', ['reservation' => $reservation]) }}" method="POST">
+                                @csrf
+                                <a href="#" onclick="document.getElementById('pay').submit();">Zaplatit</a>
+                            </form>
+                        @endif
                         <a href="#" onclick="event.preventDefault(); $('#reservation-delete-{{ $reservation->id }}').submit();">Odstranit</a>
 
                         <form action="{{ route('reservation.destroy', ['reservation' => $reservation]) }}" method="POST" id="reservation-delete-{{ $reservation->id }}" class="d-none">

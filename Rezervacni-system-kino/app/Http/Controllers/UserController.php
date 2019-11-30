@@ -130,7 +130,7 @@ class UserController extends Controller
             return redirect()->route('user.index');
         }
         else{
-            return redirect()->route('home');
+            return redirect('/');
         }
     }
 }
