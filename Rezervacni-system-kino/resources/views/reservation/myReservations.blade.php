@@ -45,7 +45,7 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="5" class="text-center">
+                    <td colspan="6" class="text-center">
                         Zadne rezervace
                     </td>
                 </tr>

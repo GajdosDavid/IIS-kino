@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Performance;
 use File;
 use Exception;
 use App\Piece;
@@ -72,7 +73,9 @@ class PieceController extends Controller
      */
     public function show(Piece $piece)
     {
-        return view('piece.show', ['piece' => $piece]);
+        $performance = Performance::where('piece_id', $piece->id)->orderBy('date')->get();
+
+        return view('piece.show', ['piece' => $piece, 'performances' => $performance]);
     }
 
     /**
