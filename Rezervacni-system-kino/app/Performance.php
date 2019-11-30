@@ -16,6 +16,6 @@ class Performance extends Model
 
     public function halls()
     {
-        return $this->belongsToMany(Role::class, 'performance_hall');
+        return $this->belongsToMany(Hall::class, 'performance_hall');
     }
 }

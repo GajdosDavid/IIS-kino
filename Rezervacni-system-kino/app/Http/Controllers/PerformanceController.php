@@ -2,16 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Hall;
 use App\Performance;
+use Exception;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use File;
+use Illuminate\View\View;
 
 class PerformanceController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function index()
     {
@@ -21,18 +26,18 @@ class PerformanceController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function create()
     {
-        return view('performance.create');
+        return view('performance.create', ['halls' => Hall::orderBy('name')->get()]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @param Request $request
+     * @return RedirectResponse
      */
     public function store(Request $request)
     {
@@ -45,10 +50,11 @@ class PerformanceController extends Controller
             'type' => ['required', 'min:1', 'max:50'],
             'description' => ['required', 'min:1', 'max:10000'],
             'genre' => ['required', 'min:1', 'max:500'],
+            'performer' => ['required', 'min:1', 'max:500'],
             'image' => ['required', 'image', 'max:5000'],
-            'performer' => ['required', 'min:1', 'max:500']
+            'hall' => ['required']
         ]);
-        //TODO: FOREING KEYS
+
         $performance = new Performance();
         $performance->name = $request->input('name');
         $performance->date = $request->input('date');
@@ -59,12 +65,16 @@ class PerformanceController extends Controller
         $performance->name = $request->input('name');
         $performance->description = $request->input('description');
         $performance->genre = $request->input('genre');
+        $performance->performer = $request->input('performer');
 
         $performance->image = $imageName = time().'.'.request()->image->getClientOriginalExtension();
         request()->image->move(storage_path('/app/public'), $imageName);
 
-        $performance->performer = $request->input('performer');
         $performance->save();
+
+        foreach ($request->hall as $key => $hallId) {
+            $performance->halls()->attach($hallId);
+        }
 
         return redirect()->route('performance.index');
     }
@@ -72,8 +82,8 @@ class PerformanceController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Performance  $performance
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @param Performance $performance
+     * @return Factory|View
      */
     public function show(Performance $performance)
     {
@@ -83,8 +93,8 @@ class PerformanceController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Performance  $performance
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @param Performance $performance
+     * @return Factory|View
      */
     public function edit(Performance $performance)
     {
@@ -94,9 +104,9 @@ class PerformanceController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Performance  $performance
-     * @return \Illuminate\Http\RedirectResponse
+     * @param Request $request
+     * @param Performance $performance
+     * @return RedirectResponse
      */
     public function update(Request $request, Performance $performance)
     {
@@ -138,14 +148,14 @@ class PerformanceController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Performance  $performance
-     * @return \Illuminate\Http\RedirectResponse
+     * @param Performance $performance
+     * @return RedirectResponse
      */
     public function destroy(Performance $performance)
     {
         try {
             $performance->delete();
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return redirect()->back()->withErrors(['Při odstranění představení došlo k chybě.']);
         }
 

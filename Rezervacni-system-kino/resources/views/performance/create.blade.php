@@ -62,6 +62,18 @@
                     <label for="image">Obrázek</label>
                     <input type="file" name="image" id="image" class="form-control" value="{{ old('image') }}" />
                 </div>
+
+                <div class="form-group form-check">
+                    <label for="hall[]">Sály</label>
+                    <br>
+                    @forelse ($halls as $hall)
+                        <input type="checkbox" name="hall[]" id="hall[]" class="form-check-input" value="{{$hall->id}}">
+                        <label class="form-check-label" for="hall[]">{{$hall->name}}</label><br>
+                    @empty
+                        <p style="color:#FF0000">Žádné sály ještě nebyly vytvořeny!</p>
+                    @endforelse
+                </div>
+
                 <button type="submit" class="btn btn-primary">Vytvořit představení</button>
             </form>
         @else
