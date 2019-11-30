@@ -21,14 +21,14 @@ class ReservationController extends Controller
      */
     public function index()
     {
-        return view('reservation.index', ['reservations' => reservation::orderBy('date')->get()]);
+        return view('reservation.index', ['reservations' => reservation::orderBy('created_at')->get()]);
     }
 
     public function myReservations()
     {
         $performance = Performance::get();
         $user = User::find(Auth::guard('web')->User()->id);
-        return view('reservation.myReservations', [ 'reservations' => reservation::where('userId', $user->id)->orderBy('date')->get(), 'performances' => $performance] );
+        return view('reservation.myReservations', [ 'reservations' => reservation::where('userId', $user->id)->orderBy('created_at')->get(), 'performances' => $performance] );
     }
     /**
      * Show the form for creating a new resource.
