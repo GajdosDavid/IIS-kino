@@ -135,7 +135,7 @@ class PieceController extends Controller
             return redirect()->back()->withErrors(['Při odstranění představení došlo k chybě.']);
         }
 
-        File::delete(storage_path('/app/publicimages/'.$piece->image));
+        File::delete(storage_path('/app/public/'.$piece->image));
 
         return redirect()->route('piece.index');
     }
