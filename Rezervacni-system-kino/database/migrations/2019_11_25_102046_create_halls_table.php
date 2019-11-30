@@ -17,7 +17,6 @@ class CreateHallsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('address')->nullable();
-            $table->integer('capacity');
             $table->integer('rows');
             $table->integer('seats_in_row');
         });

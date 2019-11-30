@@ -7,7 +7,6 @@ use Exception;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
 class HallController extends Controller
@@ -45,15 +44,13 @@ class HallController extends Controller
             'name' => ['required', 'min:3', 'max:50'],
             'address' => ['nullable', 'min:3', 'max:50'],
             'rows' => ['required', 'integer', 'min:1', 'max:50'],
-            'seats_in_row' => ['required', 'integer', 'min:1', 'max:50'],
-            'capacity' => ['required', 'integer', Rule::in([$request->input('rows') * $request->input('seats_in_row')])]
+            'seats_in_row' => ['required', 'integer', 'min:1', 'max:50']
         ]);
 
         //TODO: FOREING KEYS
         $hall = new Hall();
         $hall->name = $request->input('name');
         $hall->address = $request->input('address');
-        $hall->capacity = $request->input('capacity');
         $hall->rows = $request->input('rows');
         $hall->seats_in_row = $request->input('seats_in_row');
         $hall->save();
@@ -96,14 +93,12 @@ class HallController extends Controller
             'name' => ['required', 'min:3', 'max:50'],
             'address' => ['nullable', 'min:3', 'max:50'],
             'rows' => ['required', 'integer', 'min:1', 'max:50'],
-            'seats_in_row' => ['required', 'integer', 'min:1', 'max:50'],
-            'capacity' => ['required', 'integer', Rule::in([$request->input('rows') * $request->input('seats_in_row')])]
+            'seats_in_row' => ['required', 'integer', 'min:1', 'max:50']
         ]);
 
         //TODO: FOREING KEYS
         $hall->name = $request->input('name');
         $hall->address = $request->input('address');
-        $hall->capacity = $request->input('capacity');
         $hall->rows = $request->input('rows');
         $hall->seats_in_row = $request->input('seats_in_row');
         $hall->save();

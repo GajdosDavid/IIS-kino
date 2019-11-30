@@ -25,11 +25,6 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="capacity">Kapacita *</label>
-                    <input type="text" name="capacity" id="capacity" class="form-control" value="{{ old('capacity') ?: $hall->capacity }}" required minlength="1" maxlength="2500" />
-                </div>
-
-                <div class="form-group">
                     <label for="rows">Řady *</label>
                     <input type="text" name="rows" id="rows" class="form-control" value="{{ old('rows') ?: $hall->rows }}" required minlength="1" maxlength="50" />
                 </div>
