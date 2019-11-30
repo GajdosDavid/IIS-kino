@@ -10,7 +10,7 @@ class Reservation extends Model
         'seats' => 'array'
     ];
 
-    protected $fillable = ['seats','isPaid', 'firstName', 'surname', 'email'];
+    protected $fillable = ['seats','is_paid', 'first_name', 'surname', 'email'];
 
     public function user()
     {

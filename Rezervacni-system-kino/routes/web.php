@@ -17,6 +17,8 @@ Route::get('', 'WelcomeController');
 
 Route::resource('performance', 'PerformanceController');
 
+Route::resource('piece', 'PieceController');
+
 Route::resource('user', 'UserController');
 
 Route::resource('hall', 'HallController');

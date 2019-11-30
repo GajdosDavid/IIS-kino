@@ -6,16 +6,16 @@
 @section('content')
     <h1 class="text-center mb-4">Kino jak sviňa</h1>
 
-    @forelse ($performances as $performance)
-        <div class="performance mb-5">
+    @forelse ($pieces as $piece)
+        <div class="piece mb-5">
             <header>
                 <h2>
-                    <a href="{{ route('performance.show', ['performance' => $performance]) }}">{{ $performance->name }}</a>
+                    <a href="{{ route('piece.show', ['piece' => $piece]) }}">{{ $piece->name }}</a>
                 </h2>
             </header>
-            <img src="/storage/{{$performance->image}}" alt="$performance->name" height="300">
+            <img src="/storage/{{$piece->image}}" alt="$piece->name" height="300">
 
-            <p class="performance-content mb-1">{{ $performance->description }}</p>
+            <p class="piece-content mb-1">{{ $piece->description }}</p>
 
         </div>
     @empty

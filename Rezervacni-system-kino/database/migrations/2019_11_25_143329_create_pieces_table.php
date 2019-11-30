@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateHallsTable extends Migration
+class CreatePiecesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,14 @@ class CreateHallsTable extends Migration
      */
     public function up()
     {
-        Schema::create('halls', function (Blueprint $table) {
+        Schema::create('pieces', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->string('address')->nullable();
-            $table->integer('capacity');
-            $table->integer('rows');
-            $table->integer('seats_in_row');
+            $table->string('type')->nullable();
+            $table->string('description')->nullable();
+            $table->string('genre')->nullable();
+            $table->string('performer')->nullable();
+            $table->string('image');
         });
     }
 
@@ -30,6 +31,6 @@ class CreateHallsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('halls');
+        Schema::dropIfExists('pieces');
     }
 }

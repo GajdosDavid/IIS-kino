@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Seznam rezervací uživatele '.Auth::user()->firstName.' '.Auth::user()->surname)
+@section('title', 'Seznam rezervací uživatele '.Auth::user()->first_name.' '.Auth::user()->surname)
 @section('description', 'Výpis všech rezervací uživatele.')
 
 @section('content')
@@ -11,23 +11,25 @@
             <thead>
             <tr>
                 <th>Představení</th>
-                <th>datum</th>
-                <th>začátek</th>
-                <th>sedadla</th>
+                <th>Sál</th>
+                <th>Datum</th>
+                <th>Začátek</th>
+                <th>Sedadla</th>
                 <th></th>
             </tr>
             </thead>
             <tbody>
             @forelse ($reservations as $reservation)
                 <tr>
-                    <td>{{ $performances->find($reservation->performanceId)->name }}</td>
-                    <td>{{ $performances->find($reservation->performanceId)->date }}</td>
-                    <td>{{ date('G:i', strtotime( $performances->find($reservation->performanceId)->beginning )) }}</td>
+                    <td>{{ $performances->find($reservation->performance_id)->piece->name }}</td>
+                    <td>{{ $halls->find($reservation->hall_id)->name }}</td>
+                    <td>{{ $performances->find($reservation->performance_id)->date }}</td>
+                    <td>{{ date('G:i', strtotime( $performances->find($reservation->performance_id)->beginning )) }}</td>
                     <td>{{ $reservation->seats }}</td>
                     <td>
                         <a href="{{ route('reservation.show', ['reservation' => $reservation]) }}">Zobrazit</a>
 
-                        @if(!$reservation->isPaid)
+                        @if(!$reservation->is_paid)
                             <form id="pay" action="{{ route('reservation.pay', ['reservation' => $reservation]) }}" method="POST">
                                 @csrf
                                 <a href="#" onclick="document.getElementById('pay').submit();">Zaplatit</a>

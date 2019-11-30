@@ -2,19 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Performance;
+use App\Piece;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class WelcomeController extends Controller
 {
     /**
      * Handle the incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @param Request $request
+     * @return Factory|View
      */
     public function __invoke(Request $request)
     {
-        return view('welcome', ['performances' => Performance::all()]);
+        return view('welcome', ['pieces' => Piece::all()]);
     }
 }

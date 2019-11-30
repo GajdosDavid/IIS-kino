@@ -15,7 +15,7 @@
                 @method('PUT')
 
                 <div class="form-group">
-                    <label for="seats">Sedačky</label>
+                    <label for="seats">Sedačky *</label>
                     <input type="text" name="seats" id="seats" class="form-control" value="{{ old('seats') ?: $reservation->seats }}" />
                 </div>
 

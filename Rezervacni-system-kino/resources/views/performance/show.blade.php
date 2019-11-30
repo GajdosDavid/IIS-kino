@@ -4,14 +4,9 @@
 @section('description', $performance->description)
 
 @section('content')
-    {{ $performance->name }}
-    <br>
+    datum: {{ $performance->date }}<br>
+    začátek: {!! $performance->beginning !!}<br>
+    konec: {!! $performance->end !!}<br>
+    cena: {!! $performance->price !!}<br>
 
-    <img src="/storage/{{$performance->image}}" alt="$performance->name" height="500">
-    <br>
-    <p>{!! $performance->description !!}</p>
-
-    <a href="{{ route('reservation.create') }}" class="btn btn-primary">
-        Vytvořit rezervaci
-    </a>
 @endsection

@@ -15,28 +15,28 @@
                 @method('PUT')
 
                 <div class="form-group">
-                    <label for="name">Název sálu</label>
+                    <label for="name">Název sálu *</label>
                     <input type="text" name="name" id="name" class="form-control" value="{{ old('name') ?: $hall->name }}" required minlength="3" maxlength="50" />
                 </div>
 
                 <div class="form-group">
                     <label for="address">Adresa</label>
-                    <input type="text" name="address" id="address" class="form-control" value="{{ old('address') ?: $hall->address }}" required minlength="1" maxlength="50" />
+                    <input type="text" name="address" id="address" class="form-control" value="{{ old('address') ?: $hall->address }}" minlength="1" maxlength="50" />
                 </div>
 
                 <div class="form-group">
-                    <label for="capacity">Kapacita</label>
+                    <label for="capacity">Kapacita *</label>
                     <input type="text" name="capacity" id="capacity" class="form-control" value="{{ old('capacity') ?: $hall->capacity }}" required minlength="1" maxlength="2500" />
                 </div>
 
                 <div class="form-group">
-                    <label for="rows">Řady</label>
+                    <label for="rows">Řady *</label>
                     <input type="text" name="rows" id="rows" class="form-control" value="{{ old('rows') ?: $hall->rows }}" required minlength="1" maxlength="50" />
                 </div>
 
                 <div class="form-group">
-                    <label for="seatsInRow">Sedadla v řadě</label>
-                    <input type="text" name="seatsInRow" id="seatsInRow" class="form-control" value="{{ old('seatsInRow') ?: $hall->seatsInRow }}" required minlength="1" maxlength="50" />
+                    <label for="seats_in_row">Sedadla v řadě *</label>
+                    <input type="text" name="seats_in_row" id="seats_in_row" class="form-control" value="{{ old('seats_in_row') ?: $hall->seats_in_row }}" required minlength="1" maxlength="50" />
                 </div>
 
                 <button type="submit" class="btn btn-primary">Uložit sál</button>

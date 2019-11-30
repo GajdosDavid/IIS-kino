@@ -14,27 +14,27 @@
                 @csrf
 
                 <div class="form-group">
-                    <label for="firstName">Jméno</label>
-                    <input type="text" name="firstName" id="firstName" class="form-control" value="{{ old('firstName') }}" required minlength="1" maxlength="30" />
+                    <label for="first_name">Jméno *</label>
+                    <input type="text" name="first_name" id="first_name" class="form-control" value="{{ old('first_name') }}" required minlength="1" maxlength="30" />
                 </div>
 
                 <div class="form-group">
-                    <label for="surname">Přijmení</label>
+                    <label for="surname">Přijmení *</label>
                     <input type="text" name="surname" id="surname" class="form-control" value="{{ old('surname') }}" required minlength="1" maxlength="30" />
                 </div>
 
                 <div class="form-group">
                     <label for="phone">Telefonní číslo</label>
-                    <input type="text" name="phone" id="phone" class="form-control" value="{{ old('phone') }}" required minlength="4" maxlength="20" />
+                    <input type="text" name="phone" id="phone" class="form-control" value="{{ old('phone') }}" minlength="4" maxlength="20" />
                 </div>
 
                 <div class="form-group">
-                    <label for="email">E-email</label>
+                    <label for="email">E-email *</label>
                     <input type="text" name="email" id="email" class="form-control" value="{{ old('email') }}" />
                 </div>
 
                 <div class="form-group">
-                    <label for="password">Heslo</label>
+                    <label for="password">Heslo *</label>
                     <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
 
                     @error('password')
@@ -45,12 +45,12 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="password-confirm">Potvrdit heslo</label>
+                    <label for="password-confirm">Potvrdit heslo *</label>
                     <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                 </div>
 
                 <div class="form-group">
-                    <label for="role">Role</label>
+                    <label for="role">Role *</label>
                     <select name="role" id="role" class="form-control" >
                         <option value="0">Divák</option>
                         <option value="1">Pokladní</option>

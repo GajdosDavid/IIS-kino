@@ -15,16 +15,13 @@ class CreatePerformancesTable extends Migration
     {
         Schema::create('performances', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
             $table->time('beginning');
             $table->time('end');
             $table->date('date');
-            $table->integer('price');
-            $table->string('type');
-            $table->string('description');
-            $table->string('genre');
-            $table->string('image');
-            $table->string('performer');
+            $table->string('price');
+            $table->unsignedBigInteger('piece_id');
+            $table->foreign('piece_id')->references('id')->on('pieces')
+                ->onDelete('cascade');
         });
     }
 
