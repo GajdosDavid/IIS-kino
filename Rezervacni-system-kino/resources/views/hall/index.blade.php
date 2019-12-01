@@ -22,7 +22,7 @@
                         <td>{{ $hall->name }}</td>
                         <td>{{ $hall->address }}</td>
                         <td>
-                            <a href="{{ route('hall.show', ['hall' => $hall]) }}">Zobrazit</a>
+                            <a href="{{ route('hall.show', ['hall' => $hall]) }}">Detail</a>
                             <a href="{{ route('hall.edit', ['hall' => $hall]) }}">Editovat</a>
                             <a href="#" onclick="event.preventDefault(); $('#hall-delete-{{ $hall->id }}').submit();">Odstranit</a>
 

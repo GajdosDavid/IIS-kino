@@ -10,8 +10,38 @@
         @csrf
 
         <div class="form-group">
-            <label for="seats">Sedačky *</label>
-            <input type="text" name="seats" id="seats" class="form-control" value="{{ old('seats') }}" />
+            <h2>Sál {{$hall->name}}</h2>
+            <br>
+            <table>
+                <col width="30">
+                @for( $seat = 1; $seat <= $hall->seats_in_row ; $seat++)
+                    <col width="25">
+                @endfor
+                <thead align="center">
+                <tr>
+                    <th></th>
+                    @for( $seat = 1; $seat <= $hall->seats_in_row ; $seat++)
+                        <th>{{$seat}}</th>
+                    @endfor
+                </tr>
+                </thead>
+                <tbody align="center">
+                @for( $row = 1; $row <= $hall->rows ; $row++)
+                    <tr>
+                        <td>{{$row}}</td>
+                        @for( $seat = 1; $seat <= $hall->seats_in_row ; $seat++)
+                            @if( in_array("$row,$seat", $reservedSeats) )
+                                <td style="background: red; border: 5px solid #FFFFFF; "/>
+                            @else
+                                <td>
+                                    <input type="checkbox" name="seats[]" id="seats[]" value="{{$row}},{{$seat}}">
+                                </td>
+                            @endif
+                        @endfor
+                    </tr>
+                @endfor
+                </tbody>
+            </table>
         </div>
 
         <button type="submit" class="btn btn-primary">Vytvořit rezervaci</button>

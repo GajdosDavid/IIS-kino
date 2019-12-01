@@ -16,7 +16,7 @@
     <p>účinkující: {!! $piece->performer !!}</p>
 
     @if($performances->isEmpty())
-        <p>Pro toto kulturní dílo není žádná událost.</p>
+        <p>Momentálně pro toto kulturní dílo není naplánována žádná událost.</p>
     @else
         <table class="table table-striped table-bordered table-responsive-md">
             <thead>

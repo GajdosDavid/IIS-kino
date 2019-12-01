@@ -22,7 +22,7 @@
                         <td>{{ $user->surname }}</td>
                         <td>{{ $user->first_name }}</td>
                         <td>
-                            <a href="{{ route('user.show', ['user' => $user]) }}">Zobrazit</a>
+                            <a href="{{ route('user.show', ['user' => $user]) }}">Detail</a>
                             <a href="{{ route('user.edit', ['user' => $user]) }}">Editovat</a>
                             <a href="#" onclick="event.preventDefault(); $('#user-delete-{{ $user->id }}').submit();">Odstranit</a>
 

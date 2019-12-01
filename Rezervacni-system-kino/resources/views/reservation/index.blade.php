@@ -18,21 +18,23 @@
                     <th>Datum</th>
                     <th>Začátek</th>
                     <th>Sedadla</th>
+                    <th>Zaplaceno</th>
                     <th></th>
                 </tr>
                 </thead>
                 <tbody>
                 @forelse ($reservations as $reservation)
                     <tr>
-                        <td>{{ $users->find($reservation->user_id)->surname }}</td>
-                        <td>{{ $users->find($reservation->user_id)->first_name }}</td>
+                        <td>{{ $users->contains('id', $reservation->user_id) ? $users->find($reservation->user_id)->surname : $reservation->surname}}</td>
+                        <td>{{ $users->contains('id', $reservation->user_id) ? $users->find($reservation->user_id)->first_name  : $reservation->first_name}}</td>
                         <td>{{ $performances->find($reservation->performance_id)->piece->name }}</td>
                         <td>{{ $halls->find($reservation->hall_id)->name }}</td>
                         <td>{{ $performances->find($reservation->performance_id)->date }}</td>
                         <td>{{ date('G:i', strtotime( $performances->find($reservation->performance_id)->beginning )) }}</td>
-                        <td>{{ $reservation->seats }}</td>
+                        <td>{{ json_encode($reservation->seats) }}</td>
+                        <td>{{ $reservation->is_paid ? 'Ano' : 'Ne' }}</td>
                         <td>
-                            <a href="{{ route('reservation.show', ['reservation' => $reservation]) }}">Zobrazit</a>
+                            <a href="{{ route('reservation.show', ['reservation' => $reservation]) }}">Detail</a>
                             <a href="{{ route('reservation.edit', ['reservation' => $reservation]) }}">Editovat</a>
                             <a href="#" onclick="event.preventDefault(); $('#reservation-delete-{{ $reservation->id }}').submit();">Odstranit</a>
 
@@ -44,17 +46,13 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="8" class="text-center">
+                        <td colspan="9" class="text-center">
                             Zadne rezervace
                         </td>
                     </tr>
                 @endforelse
                 </tbody>
             </table>
-
-            <a href="{{ route('reservation.create') }}" class="btn btn-primary">
-                Vytvořit rezervaci
-            </a>
         @else
             <h1>K této stránce nemáte přístup</h1>
         @endif
