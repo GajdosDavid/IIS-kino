@@ -137,7 +137,7 @@ class ReservationController extends Controller
         }
 
         if(Auth::guest()){
-            return view('reservation.createOnPerformance',[
+            return view('reservation.create',[
                 'reservations' => reservation::orderBy('created_at')->get(),
                 'performance' => $performance,
                 'hall' => $hall,
@@ -147,7 +147,7 @@ class ReservationController extends Controller
         else{
             $user = User::find(Auth::guard('web')->User()->id);
 
-            return view('reservation.createOnPerformance',[
+            return view('reservation.create',[
                 'reservations' => reservation::orderBy('created_at')->get(),
                 'performance' => $performance,
                 'user' => $user,

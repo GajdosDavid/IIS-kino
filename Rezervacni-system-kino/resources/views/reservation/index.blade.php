@@ -17,7 +17,7 @@
                     <th>Sál</th>
                     <th>Datum</th>
                     <th>Začátek</th>
-                    <th>Sedadla</th>
+                    <th>Sedadla "řada, sedadlo"</th>
                     <th>Zaplaceno</th>
                     <th></th>
                 </tr>
