@@ -10,11 +10,12 @@
         <table class="table table-striped table-bordered table-responsive-md">
             <thead>
             <tr>
-                <th>Představení</th>
+                <th>Událost</th>
                 <th>Sál</th>
                 <th>Datum</th>
                 <th>Začátek</th>
                 <th>Sedadla</th>
+                <th>Zaplaceno</th>
                 <th></th>
             </tr>
             </thead>
@@ -25,7 +26,8 @@
                     <td>{{ $halls->find($reservation->hall_id)->name }}</td>
                     <td>{{ $performances->find($reservation->performance_id)->date }}</td>
                     <td>{{ date('G:i', strtotime( $performances->find($reservation->performance_id)->beginning )) }}</td>
-                    <td>{{ $reservation->seats }}</td>
+                    <td>{{ json_encode($reservation->seats) }}</td>
+                    <td>{{ $reservation->is_paid ? 'Ano' : 'Ne' }}</td>
                     <td>
                         <a href="{{ route('reservation.show', ['reservation' => $reservation]) }}">Zobrazit</a>
 
@@ -45,7 +47,7 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="5" class="text-center">
+                    <td colspan="7" class="text-center">
                         Zadne rezervace
                     </td>
                 </tr>

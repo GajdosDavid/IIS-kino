@@ -12,6 +12,8 @@
                 <thead>
                 <tr>
                     <th>Jméno</th>
+                    <th>Typ</th>
+                    <th>Žánr</th>
                     <th>Popisek</th>
                     <th></th>
                 </tr>
@@ -20,6 +22,8 @@
                 @forelse ($pieces as $piece)
                     <tr>
                         <td>{{ $piece->name }}</td>
+                        <td>{{ $piece->type }}</td>
+                        <td>{{ $piece->genre }}</td>
                         <td>{{ $piece->description }}</td>
                         <td>
                             <a href="{{ route('piece.show', ['piece' => $piece]) }}">Zobrazit</a>

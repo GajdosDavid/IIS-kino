@@ -13,11 +13,11 @@
                 <tr>
                     <th>Příjmení</th>
                     <th>Jméno</th>
-                    <th>Představení</th>
+                    <th>Události</th>
                     <th>Sál</th>
-                    <th>datum</th>
-                    <th>začátek</th>
-                    <th>sedadla</th>
+                    <th>Datum</th>
+                    <th>Začátek</th>
+                    <th>Sedadla</th>
                     <th></th>
                 </tr>
                 </thead>

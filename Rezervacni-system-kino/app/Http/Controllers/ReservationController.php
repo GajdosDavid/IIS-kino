@@ -39,9 +39,14 @@ class ReservationController extends Controller
 
     public function myReservations()
     {
+        if(Auth::guest()){
+            return redirect('/');
+        }
+
         $performance = Performance::get();
         $hall = Hall::get();
         $user = User::find(Auth::guard('web')->User()->id);
+
         return view('reservation.myReservations', [
             'reservations' => reservation::where('user_id', $user->id)->orderBy('created_at')->get(),
             'performances' => $performance,
@@ -67,19 +72,49 @@ class ReservationController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'seats' => ['required']
+            'seats' => ['required'],
+            'user_id' => ['required'],
+            'hall_id' => ['required'],
+            'performance_id' => ['required']
         ]);
 
-        //TODO: FOREING KEYS
         $reservation = new Reservation();
         $reservation->seats = $request->input('seats');
-        $reservation->user_id = 1;
-        $reservation->hall_id = 1;
-        $reservation->performance_id = 1;
+
+        $user = User::find($request->input('user_id'));
+        $reservation->user()->associate($user);
+
+        $performance = Performance::find($request->input('performance_id'));
+        $reservation->performance()->associate($performance);
+
+        $hall = Hall::find($request->input('hall_id'));
+        $reservation->hall()->associate($hall);
+
         $reservation->save();
 
-        return redirect()->route('reservation.index');
+
+        return redirect('/');
     }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return Factory|View
+     */
+    public function createOnPerformance($performance_id, $hall_id)
+    {
+        $user = User::find(Auth::guard('web')->User()->id);
+        $performance = Performance::find($performance_id);
+        $hall = Hall::find($hall_id);
+
+        return view('reservation.createOnPerformance',[
+        'reservations' => reservation::orderBy('created_at')->get(),
+            'performance' => $performance,
+            'user' => $user,
+            'hall' => $hall
+        ]);
+    }
+
 
     /**
      * Display the specified resource.
@@ -147,6 +182,6 @@ class ReservationController extends Controller
     {
         $reservation->update(['is_paid' => '1']);
 
-        return redirect('/');
+        return redirect()->back();
     }
 }

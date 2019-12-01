@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
-@section('title', 'Editace představení ' . $performance->piece->name)
-@section('description', 'Editor pro editaci představení.')
+@section('title', 'Editace události ' . $performance->piece->name)
+@section('description', 'Editor pro editaci události.')
 
 @section('content')
     @guest
         <h1>K této stránce nemáte přístup</h1>
     @else
         @if (Auth::user()->role == 3 || Auth::user()->role == 2 )
-            <h1>Editace představení {{ $performance->piece->name }}</h1>
+            <h1>Editace události {{ $performance->piece->name }}</h1>
 
             <form action="{{ route('performance.update', ['performance' => $performance]) }}" method="POST" enctype="multipart/form-data">
                 @csrf
@@ -50,14 +50,14 @@
                     <label for="hall[]">Sály *</label>
                     <br>
                     @forelse ($halls as $hall)
-                        <input type="checkbox" name="hall[]" id="hall[]" value="{{$hall->id}}">
+                        <input type="checkbox" name="hall[]" id="hall[]" value="{{$hall->id}}" {{ $performance->halls->contains('id', $hall->id) ? 'checked' : '' }}>
                         <label for="hall[]">{{$hall->name}}</label><br>
                     @empty
                         <p style="color:#FF0000">Žádné sály ještě nebyly vytvořeny!</p>
                     @endforelse
                 </div>
 
-                <button type="submit" class="btn btn-primary">Uložit představení</button>
+                <button type="submit" class="btn btn-primary">Uložit událost</button>
             </form>
         @else
             <h1>K této stránce nemáte přístup</h1>

@@ -8,7 +8,7 @@
         <h1>K této stránce nemáte přístup</h1>
     @else
         @if (Auth::user()->role == 3 || Auth::user()->role == 1 )
-            <h1>Editace představení {{ $reservation->title }}</h1>
+            <h1>Editace rezervace na událost {{ $reservation->performance->piece->name }}</h1>
 
             <form action="{{ route('reservation.update', ['reservation' => $reservation]) }}" method="POST">
                 @csrf
