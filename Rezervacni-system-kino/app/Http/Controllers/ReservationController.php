@@ -71,18 +71,38 @@ class ReservationController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'seats' => ['required'],
-            'user_id' => ['required'],
-            'hall_id' => ['required'],
-            'performance_id' => ['required']
-        ]);
 
-        $reservation = new Reservation();
+        if($request->first_name){
+            $this->validate($request, [
+                'seats' => ['required'],
+                'hall_id' => ['required'],
+                'performance_id' => ['required'],
+                'first_name' => ['required', 'min:1', 'max:30'],
+                'surname' => ['required', 'min:1', 'max:30'],
+                'phone' => ['nullable', 'min:4', 'max:20'],
+                'email' => ['required', 'email', 'unique:users'],
+            ]);
+
+            $reservation = new Reservation();
+            $reservation->first_name = $request->input('first_name');
+            $reservation->surname = $request->input('surname');
+            $reservation->phone = $request->input('phone');
+            $reservation->email = $request->input('email');
+        }
+        else{
+            $this->validate($request, [
+                'seats' => ['required'],
+                'user_id' => ['required'],
+                'hall_id' => ['required'],
+                'performance_id' => ['required']
+            ]);
+
+            $reservation = new Reservation();
+            $user = User::find($request->input('user_id'));
+            $reservation->user()->associate($user);
+        }
+
         $reservation->seats = $request->input('seats');
-
-        $user = User::find($request->input('user_id'));
-        $reservation->user()->associate($user);
 
         $performance = Performance::find($request->input('performance_id'));
         $reservation->performance()->associate($performance);
@@ -91,7 +111,6 @@ class ReservationController extends Controller
         $reservation->hall()->associate($hall);
 
         $reservation->save();
-
 
         return redirect('/');
     }
@@ -103,16 +122,39 @@ class ReservationController extends Controller
      */
     public function createOnPerformance($performance_id, $hall_id)
     {
-        $user = User::find(Auth::guard('web')->User()->id);
         $performance = Performance::find($performance_id);
         $hall = Hall::find($hall_id);
 
-        return view('reservation.createOnPerformance',[
-        'reservations' => reservation::orderBy('created_at')->get(),
-            'performance' => $performance,
-            'user' => $user,
-            'hall' => $hall
-        ]);
+        $existingReservations = Reservation::where([
+                            ['hall_id', $hall->id],
+                            ['performance_id', $performance->id],
+                        ])->get();
+
+        $reservedSeats = array();
+
+        foreach( $existingReservations as $existingReservation){
+            $reservedSeats = array_merge($reservedSeats, $existingReservation->seats);
+        }
+
+        if(Auth::guest()){
+            return view('reservation.create',[
+                'reservations' => reservation::orderBy('created_at')->get(),
+                'performance' => $performance,
+                'hall' => $hall,
+                'reservedSeats' => $reservedSeats
+            ]);
+        }
+        else{
+            $user = User::find(Auth::guard('web')->User()->id);
+
+            return view('reservation.create',[
+                'reservations' => reservation::orderBy('created_at')->get(),
+                'performance' => $performance,
+                'user' => $user,
+                'hall' => $hall,
+                'reservedSeats' => $reservedSeats
+            ]);
+        }
     }
 
 
@@ -135,7 +177,21 @@ class ReservationController extends Controller
      */
     public function edit(Reservation $reservation)
     {
-        return view('reservation.edit', ['reservation' => $reservation]);
+        $performance = Performance::find($reservation->performance->id);
+        $hall = Hall::find($reservation->hall->id);
+
+        $existingReservations = Reservation::where([
+            ['hall_id', $hall->id],
+            ['performance_id', $performance->id],
+        ])->get();
+
+        $reservedSeats = array();
+
+        foreach( $existingReservations as $existingReservation){
+            $reservedSeats = array_merge($reservedSeats, $existingReservation->seats);
+        }
+
+        return view('reservation.edit', ['reservation' => $reservation, 'reservedSeats' => $reservedSeats]);
     }
 
     /**

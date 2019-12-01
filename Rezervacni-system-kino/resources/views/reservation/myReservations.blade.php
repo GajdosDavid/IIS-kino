@@ -29,10 +29,10 @@
                     <td>{{ json_encode($reservation->seats) }}</td>
                     <td>{{ $reservation->is_paid ? 'Ano' : 'Ne' }}</td>
                     <td>
-                        <a href="{{ route('reservation.show', ['reservation' => $reservation]) }}">Zobrazit</a>
+                        <a href="{{ route('reservation.show', ['reservation' => $reservation]) }}">Detail</a>
 
                         @if(!$reservation->is_paid)
-                            <form id="pay" action="{{ route('reservation.pay', ['reservation' => $reservation]) }}" method="POST">
+                            <form id="pay" action="{{ route('reservation.pay', ['reservation' => $reservation]) }}" method="POST" style="display: inline">
                                 @csrf
                                 <a href="#" onclick="document.getElementById('pay').submit();">Zaplatit</a>
                             </form>

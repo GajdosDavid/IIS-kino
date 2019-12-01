@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Performance;
 use App\Piece;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
@@ -17,6 +18,15 @@ class WelcomeController extends Controller
      */
     public function __invoke(Request $request)
     {
-        return view('welcome', ['pieces' => Piece::all()]);
+        $piecesWithPerformance = collect();
+
+        $pieces =  Piece::all();
+        foreach($pieces as $piece){
+            if(Performance::where('piece_id', $piece->id)->count() > 0){
+                $piecesWithPerformance->add($piece);
+            }
+        }
+
+        return view('welcome', ['pieces' => $piecesWithPerformance]);
     }
 }

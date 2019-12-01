@@ -15,10 +15,40 @@
                 @method('PUT')
 
                 <div class="form-group">
-                    <label for="seats">Sedačky *</label>
-                    <input type="text" name="seats" id="seats" class="form-control" value="{{ old('seats') ?: $reservation->seats }}" />
+                    <h2>Sál {{$reservation->hall->name}}</h2>
+                    <br>
+                    <table>
+                        <col width="30">
+                        @for( $seat = 1; $seat <= $reservation->hall->seats_in_row ; $seat++)
+                            <col width="25">
+                        @endfor
+                        <thead align="center">
+                        <tr>
+                            <th></th>
+                            @for( $seat = 1; $seat <= $reservation->hall->seats_in_row ; $seat++)
+                                <th>{{$seat}}</th>
+                            @endfor
+                        </tr>
+                        </thead>
+                        <tbody align="center">
+                        @for( $row = 1; $row <= $reservation->hall->rows ; $row++)
+                            <tr>
+                                <td>{{$row}}</td>
+                                @for( $seat = 1; $seat <= $reservation->hall->seats_in_row ; $seat++)
+                                    @if( in_array("$row,$seat", $reservedSeats) && !in_array("$row,$seat", $reservation->seats))
+                                        <td style="background: red; border: 5px solid #FFFFFF; "/>
+                                    @else
+                                        <td>
+                                            <input type="checkbox" name="seats[]" id="seats[]" value="{{$row}},{{$seat}}
+                                            {{ in_array("$row,$seat", $reservation->seats) ? 'checked' : '' }}">
+                                        </td>
+                                    @endif
+                                @endfor
+                            </tr>
+                        @endfor
+                        </tbody>
+                    </table>
                 </div>
-
 
                 <button type="submit" class="btn btn-primary">Uložit rezervaci</button>
             </form>

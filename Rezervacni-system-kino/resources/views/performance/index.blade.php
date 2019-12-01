@@ -30,7 +30,7 @@
                             @endforeach
                         </td>
                         <td>
-                            <a href="{{ route('performance.show', ['performance' => $performance]) }}">Zobrazit</a>
+                            <a href="{{ route('performance.show', ['performance' => $performance]) }}">Detail</a>
                             <a href="{{ route('performance.edit', ['performance' => $performance]) }}">Editovat</a>
                             <a href="#" onclick="event.preventDefault(); $('#performance-delete-{{ $performance->id }}').submit();">Odstranit</a>
 

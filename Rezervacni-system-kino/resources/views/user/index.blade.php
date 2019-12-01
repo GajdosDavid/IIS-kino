@@ -13,6 +13,7 @@
                 <tr>
                     <th>Přijmení</th>
                     <th>Jméno</th>
+                    <th>Role</th>
                     <th></th>
                 </tr>
                 </thead>
@@ -22,7 +23,18 @@
                         <td>{{ $user->surname }}</td>
                         <td>{{ $user->first_name }}</td>
                         <td>
-                            <a href="{{ route('user.show', ['user' => $user]) }}">Zobrazit</a>
+                            @if($user->role == 0)
+                                Divák
+                            @elseif($user->role == 1)
+                                Pokladní
+                            @elseif($user->role == 2)
+                                Redaktor
+                            @elseif($user->role == 3)
+                                Admin
+                            @endif
+                        </td>
+                        <td>
+                            <a href="{{ route('user.show', ['user' => $user]) }}">Detail</a>
                             <a href="{{ route('user.edit', ['user' => $user]) }}">Editovat</a>
                             <a href="#" onclick="event.preventDefault(); $('#user-delete-{{ $user->id }}').submit();">Odstranit</a>
 

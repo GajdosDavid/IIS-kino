@@ -51,8 +51,8 @@
                     <label for="hall[]">Sály *</label>
                     <br>
                     @forelse ($halls as $hall)
-                        <input type="checkbox" name="hall[]" id="hall[]" value="{{$hall->id}}">
-                        <label for="hall[]">{{$hall->name}}</label><br>
+                        <input type="checkbox" name="hall[{{$hall->id}}]" id="hall[{{$hall->id}}]" value="{{$hall->id}}">
+                        <label for="hall[{{$hall->id}}]">{{$hall->name}}</label><br>
                     @empty
                         <p style="color:#FF0000">Žádný sál ještě nebyl vytvořen!</p>
                     @endforelse

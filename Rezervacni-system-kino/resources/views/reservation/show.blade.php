@@ -1,13 +1,19 @@
 @extends('layouts.app')
 
-@section('title', $reservation->date)
-@section('description', $reservation->seats)
+@section('title', "Detail rezervace")
+@section('description', "Detail rezervace")
 
 @section('content')
-    <p>sedadla:{{ $reservation->seats }}</p>
+    <p>sedadla:{{ json_encode($reservation->seats) }}</p>
     <p>zaplaceno: {!! $reservation->is_paid !!}</p>
 
-    <p>Údaje o neregistrovanem uživateli:
-    <p>Jmeno: {{ $reservation->first_name.' '.$reservation->surname}}</p>
-    <p>Email: {{ $reservation->email}}</p>
+    @if($reservation->user)
+        <p><a href="{{ route('user.show', ['user' => $reservation->user]) }}">Detail uživatele</a></p>
+    @else
+        <p>Údaje o neregistrovanem uživateli:
+        <p>Jmeno: {{ $reservation->first_name.' '.$reservation->surname}}</p>
+        <p>Telefon: {{ $reservation->phone}}</p>
+        <p>Email: {{ $reservation->email}}</p>
+
+    @endif
 @endsection

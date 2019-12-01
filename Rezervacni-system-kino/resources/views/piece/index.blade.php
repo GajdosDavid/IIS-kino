@@ -26,7 +26,7 @@
                         <td>{{ $piece->genre }}</td>
                         <td>{{ $piece->description }}</td>
                         <td>
-                            <a href="{{ route('piece.show', ['piece' => $piece]) }}">Zobrazit</a>
+                            <a href="{{ route('piece.show', ['piece' => $piece]) }}">Detail</a>
                             <a href="{{ route('piece.edit', ['piece' => $piece]) }}">Editovat</a>
                             <a href="#" onclick="event.preventDefault(); $('#piece-delete-{{ $piece->id }}').submit();">Odstranit</a>
 

@@ -29,6 +29,7 @@ class CreateReservationsTable extends Migration
                 ->onDelete('cascade');
             $table->string('first_name')->nullable();
             $table->string('surname')->nullable();
+            $table->string('phone')->nullable();
             $table->string('email')->nullable();
         });
     }
