@@ -52,7 +52,10 @@
 
                 <h4>Cena za jeden lístek: {{$reservation->performance->price}}</h4>
                 <br>
-
+                <label for="is_paid">Zaplaceno</label>
+                <input type="checkbox"  name="is_paid" id="is_paid" value="true" {{$reservation->is_paid ? 'checked' : ''}}>
+                <br>
+                <br>
                 <button type="submit" class="btn btn-primary">Uložit rezervaci</button>
             </form>
         @else

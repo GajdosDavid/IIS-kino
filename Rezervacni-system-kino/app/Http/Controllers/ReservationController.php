@@ -206,7 +206,9 @@ class ReservationController extends Controller
             'seats' => ['required', 'array', 'max:10']
         ]);
 
-        $reservation->update(['seats' => $request->input('seats')]);
+        $is_paid = $request->input('is_paid') ? true : false;
+
+        $reservation->update(['seats' => $request->input('seats'), 'is_paid' => $is_paid]);
 
         return redirect()->route('reservation.index');
     }
