@@ -24,6 +24,7 @@
                 <th>Jméno sálu</th>
                 <th>Datum</th>
                 <th>Začátek</th>
+                <th>Cena</th>
                 <th></th>
             </tr>
             </thead>
@@ -34,6 +35,7 @@
                         <td>{{$hall->name}}</td>
                         <td>{{$performance->date}}</td>
                         <td>{{$performance->beginning}}</td>
+                        <td>{{$performance->price}} Kč</td>
                         <td>
                             <a href="{{ route('reservation.createOnPerformance', [$performance->id, $hall->id]) }}" >Rezervovat</a>
                         </td>

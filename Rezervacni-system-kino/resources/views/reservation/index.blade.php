@@ -18,6 +18,7 @@
                     <th>Datum</th>
                     <th>Začátek</th>
                     <th>Sedadla "řada, sedadlo"</th>
+                    <th>Cena</th>
                     <th>Zaplaceno</th>
                     <th></th>
                 </tr>
@@ -27,11 +28,12 @@
                     <tr>
                         <td>{{ $users->contains('id', $reservation->user_id) ? $users->find($reservation->user_id)->surname : $reservation->surname}}</td>
                         <td>{{ $users->contains('id', $reservation->user_id) ? $users->find($reservation->user_id)->first_name  : $reservation->first_name}}</td>
-                        <td>{{ $performances->find($reservation->performance_id)->piece->name }}</td>
-                        <td>{{ $halls->find($reservation->hall_id)->name }}</td>
-                        <td>{{ $performances->find($reservation->performance_id)->date }}</td>
-                        <td>{{ date('G:i', strtotime( $performances->find($reservation->performance_id)->beginning )) }}</td>
+                        <td>{{ $reservation->performance->piece->name }}</td>
+                        <td>{{ $reservation->hall->name }}</td>
+                        <td>{{ $reservation->performance->date }}</td>
+                        <td>{{ date('G:i', strtotime( $reservation->performance->beginning )) }}</td>
                         <td>{{ json_encode($reservation->seats) }}</td>
+                        <td>{{ $reservation->performance->price * count($reservation->seats) }} Kč</td>
                         <td>{{ $reservation->is_paid ? 'Ano' : 'Ne' }}</td>
                         <td>
                             <a href="{{ route('reservation.show', ['reservation' => $reservation]) }}">Detail</a>
@@ -46,7 +48,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="9" class="text-center">
+                        <td colspan="10" class="text-center">
                             Zadne rezervace
                         </td>
                     </tr>

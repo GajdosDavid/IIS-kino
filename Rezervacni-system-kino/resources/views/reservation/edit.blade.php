@@ -39,8 +39,8 @@
                                         <td style="background: red; border: 5px solid #FFFFFF; "/>
                                     @else
                                         <td>
-                                            <input type="checkbox" name="seats[]" id="seats[]" value="{{$row}},{{$seat}}
-                                            {{ in_array("$row,$seat", $reservation->seats) ? 'checked' : '' }}">
+                                            <input type="checkbox" name="seats[]" id="seats[]" value="{{$row}},{{$seat}}"
+                                            {{ in_array("$row,$seat", $reservation->seats) ? 'checked' : '' }}>
                                         </td>
                                     @endif
                                 @endfor
@@ -49,6 +49,9 @@
                         </tbody>
                     </table>
                 </div>
+
+                <h4>Cena za jeden lístek: {{$reservation->performance->price}}</h4>
+                <br>
 
                 <button type="submit" class="btn btn-primary">Uložit rezervaci</button>
             </form>

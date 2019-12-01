@@ -39,7 +39,7 @@
                     <br>
                     <select name="piece" id="piece" class="form-control">
                         @forelse ($pieces as $piece)
-                            <option value="{{$piece->id}} {{ ($piece->id == $performance->piece->id) ? "selected" : ""}}">{{$piece->name}}</option>
+                            <option value="{{$piece->id}}" {{ ($piece->id == $performance->piece->id) ? "selected" : ""}}>{{$piece->name}}</option>
                         @empty
                             <option> Žádná kulturní díla ještě nebyla vytvořena!</option>
                         @endforelse
