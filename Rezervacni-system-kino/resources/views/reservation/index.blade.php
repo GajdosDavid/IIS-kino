@@ -37,6 +37,11 @@
                         <td>{{ $reservation->is_paid ? 'Ano' : 'Ne' }}</td>
                         <td>
                             <a href="{{ route('reservation.show', ['reservation' => $reservation]) }}">Detail</a>
+
+                            @if(!$reservation->is_paid)
+                                <a href="{{ route('reservation.pay', ['reservation' => $reservation]) }}" style="display: inline">Zaplatit</a>
+                            @endif
+
                             <a href="{{ route('reservation.edit', ['reservation' => $reservation]) }}">Editovat</a>
                             <a href="#" onclick="event.preventDefault(); $('#reservation-delete-{{ $reservation->id }}').submit();">Odstranit</a>
 

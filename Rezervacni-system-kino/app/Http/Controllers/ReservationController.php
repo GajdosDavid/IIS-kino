@@ -12,6 +12,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
 
 class ReservationController extends Controller
@@ -109,6 +110,13 @@ class ReservationController extends Controller
         $hall = Hall::find($request->input('hall_id'));
         $reservation->hall()->associate($hall);
 
+        $reservedSeats = $this->getReservatedSeats($performance, $hall);
+
+        $seatsCollision = array_intersect($reservation->seats, $reservedSeats);
+        if (!empty($seatsCollision)){
+            return redirect()->back()->withErrors(['Místo nebo místa '.json_encode($seatsCollision).' jsou již zabraná.']);
+        }
+
         $reservation->save();
 
         return redirect('/');
@@ -124,16 +132,7 @@ class ReservationController extends Controller
         $performance = Performance::find($performance_id);
         $hall = Hall::find($hall_id);
 
-        $existingReservations = Reservation::where([
-                            ['hall_id', $hall->id],
-                            ['performance_id', $performance->id],
-                        ])->get();
-
-        $reservedSeats = array();
-
-        foreach( $existingReservations as $existingReservation){
-            $reservedSeats = array_merge($reservedSeats, $existingReservation->seats);
-        }
+        $reservedSeats = $this->getReservatedSeats($performance, $hall);
 
         if(Auth::guest()){
             return view('reservation.create',[
@@ -172,22 +171,18 @@ class ReservationController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param Reservation $reservation
-     * @return Factory|View
+     * @return Factory|RedirectResponse|View
      */
     public function edit(Reservation $reservation)
     {
         $performance = Performance::find($reservation->performance->id);
         $hall = Hall::find($reservation->hall->id);
 
-        $existingReservations = Reservation::where([
-            ['hall_id', $hall->id],
-            ['performance_id', $performance->id],
-        ])->get();
+        $reservedSeats = $this->getReservatedSeats($performance, $hall);
 
-        $reservedSeats = array();
-
-        foreach( $existingReservations as $existingReservation){
-            $reservedSeats = array_merge($reservedSeats, $existingReservation->seats);
+        $seatsCollision = array_intersect($reservation->seats, $reservedSeats);
+        if (!empty($seatsCollision)){
+            return redirect()->back()->withErrors(['Místo nebo místa '.json_encode($seatsCollision).' jsou již zabraná.']);
         }
 
         return view('reservation.edit', ['reservation' => $reservation, 'reservedSeats' => $reservedSeats]);
@@ -206,7 +201,9 @@ class ReservationController extends Controller
             'seats' => ['required', 'array', 'max:10']
         ]);
 
-        $reservation->update(['seats' => $request->input('seats')]);
+        $is_paid = $request->input('is_paid') ? true : false;
+
+        $reservation->update(['seats' => $request->input('seats'), 'is_paid' => $is_paid]);
 
         return redirect()->route('reservation.index');
     }
@@ -233,5 +230,21 @@ class ReservationController extends Controller
         $reservation->update(['is_paid' => '1']);
 
         return redirect()->back();
+    }
+
+    private function getReservatedSeats($performance, $hall)
+    {
+        $existingReservations = Reservation::where([
+            ['hall_id', $hall->id],
+            ['performance_id', $performance->id],
+        ])->get();
+
+        $reservedSeats = array();
+
+        foreach( $existingReservations as $existingReservation){
+            $reservedSeats = array_merge($reservedSeats, $existingReservation->seats);
+        }
+
+        return $reservedSeats;
     }
 }
