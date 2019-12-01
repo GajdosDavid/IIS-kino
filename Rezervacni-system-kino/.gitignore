@@ -1,6 +1,7 @@
 /vendor/
 /public/hot
 /public/storage
+/public/img
 /storage/*.key
 .env.backup
 .phpunit.result.cache

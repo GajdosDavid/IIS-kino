@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
-@section('title', 'Tvorba představení')
-@section('description', 'Editor pro vytvoření nového představení.')
+@section('title', 'Tvorba události')
+@section('description', 'Editor pro vytvoření nové události.')
 
 @section('content')
     @guest
         <h1>K této stránce nemáte přístup</h1>
     @else
         @if (Auth::user()->role == 3 || Auth::user()->role == 2 )
-            <h1>Tvorba představení</h1>
+            <h1>Tvorba události</h1>
 
             <form action="{{ route('performance.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
@@ -54,11 +54,11 @@
                         <input type="checkbox" name="hall[]" id="hall[]" value="{{$hall->id}}">
                         <label for="hall[]">{{$hall->name}}</label><br>
                     @empty
-                        <p style="color:#FF0000">Žádné sály ještě nebyly vytvořeny!</p>
+                        <p style="color:#FF0000">Žádný sál ještě nebyl vytvořen!</p>
                     @endforelse
                 </div>
 
-                <button type="submit" class="btn btn-primary">Vytvořit představení</button>
+                <button type="submit" class="btn btn-primary">Vytvořit událost</button>
             </form>
         @else
             <h1>K této stránce nemáte přístup</h1>

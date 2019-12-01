@@ -58,7 +58,7 @@ class PieceController extends Controller
         $piece->performer = $request->input('performer');
 
         $piece->image = $imageName = time().'.'.request()->image->getClientOriginalExtension();
-        request()->image->move(storage_path('/app/public'), $imageName);
+        request()->image->move(public_path('/img'), $imageName);
 
         $piece->save();
 
@@ -73,7 +73,7 @@ class PieceController extends Controller
      */
     public function show(Piece $piece)
     {
-        $performance = Performance::where('piece_id', $piece->id)->orderBy('date')->get();
+        $performance = Performance::where('piece_id', $piece->id)->orderBy('beginning')->orderBy('date')->get();
 
         return view('piece.show', ['piece' => $piece, 'performances' => $performance]);
     }
@@ -114,9 +114,9 @@ class PieceController extends Controller
         $piece->performer = $request->input('performer');
 
         if ($request->image){
-            File::delete(storage_path('/app/public/'.$piece->image));
+            File::delete(public_path('/img/'.$piece->image));
             $piece->image = $imageName = time().'.'.request()->image->getClientOriginalExtension();
-            request()->image->move(storage_path('/app/public'), $imageName);
+            request()->image->move(public_path('/img'), $imageName);
         }
 
         $piece->save();
@@ -135,10 +135,10 @@ class PieceController extends Controller
         try {
             $piece->delete();
         } catch (Exception $exception) {
-            return redirect()->back()->withErrors(['Při odstranění představení došlo k chybě.']);
+            return redirect()->back()->withErrors(['Při odstranění události došlo k chybě.']);
         }
 
-        File::delete(storage_path('/app/public/'.$piece->image));
+        File::delete(public_path('/img/'.$piece->image));
 
         return redirect()->route('piece.index');
     }

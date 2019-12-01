@@ -54,7 +54,7 @@
                                 <a class="p-2 text-dark" href="{{ route('user.index') }}">Správa uživatelů</a>
                             @endif
                             @if (Auth::user()->role == 3 || Auth::user()->role == 2 )
-                                <a class="p-2 text-dark" href="{{ route('performance.index') }}">Správa představení</a>
+                                <a class="p-2 text-dark" href="{{ route('performance.index') }}">Správa událostí</a>
                                 <a class="p-2 text-dark" href="{{ route('piece.index') }}">Správa kulturních děl</a>
                                 <a class="p-2 text-dark" href="{{ route('hall.index') }}">Správa sálů</a>
                             @endif

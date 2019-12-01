@@ -62,8 +62,8 @@ class PerformanceController extends Controller
         $performance->price = $request->input('price');
 
         $piece = Piece::find($request->input('piece'));
-
         $piece->performances()->save($performance);
+
         $performance->save();
 
         $performance->halls()->attach($request->hall);
@@ -137,7 +137,7 @@ class PerformanceController extends Controller
         try {
             $performance->delete();
         } catch (Exception $exception) {
-            return redirect()->back()->withErrors(['Při odstranění představení došlo k chybě.']);
+            return redirect()->back()->withErrors(['Při odstranění události došlo k chybě.']);
         }
 
         return redirect()->route('performance.index');

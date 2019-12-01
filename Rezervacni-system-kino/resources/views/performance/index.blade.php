@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Seznam představení')
-@section('description', 'Výpis všech představení v administraci.')
+@section('title', 'Seznam událostí')
+@section('description', 'Výpis všech událostí v administraci.')
 
 @section('content')
     @guest
@@ -43,7 +43,7 @@
                 @empty
                     <tr>
                         <td colspan="5" class="text-center">
-                            Nikdo zatím nevytvořil žádné představení.
+                            Nikdo zatím nevytvořil žádnou událost.
                         </td>
                     </tr>
                 @endforelse
@@ -51,7 +51,7 @@
             </table>
 
             <a href="{{ route('performance.create') }}" class="btn btn-primary">
-                Vytvořit nové představení
+                Vytvořit novou událost
             </a>
         @else
             <h1>K této stránce nemáte přístup</h1>

@@ -43,8 +43,8 @@ class HallController extends Controller
         $this->validate($request, [
             'name' => ['required', 'min:3', 'max:50'],
             'address' => ['nullable', 'min:3', 'max:50'],
-            'rows' => ['required', 'integer', 'min:1', 'max:50'],
-            'seats_in_row' => ['required', 'integer', 'min:1', 'max:50']
+            'rows' => ['required', 'integer', 'min:1', 'max:20'],
+            'seats_in_row' => ['required', 'integer', 'min:1', 'max:20']
         ]);
 
         //TODO: FOREING KEYS
@@ -92,8 +92,8 @@ class HallController extends Controller
         $this->validate($request, [
             'name' => ['required', 'min:3', 'max:50'],
             'address' => ['nullable', 'min:3', 'max:50'],
-            'rows' => ['required', 'integer', 'min:1', 'max:50'],
-            'seats_in_row' => ['required', 'integer', 'min:1', 'max:50']
+            'rows' => ['required', 'integer', 'min:1', 'max:20'],
+            'seats_in_row' => ['required', 'integer', 'min:1', 'max:20']
         ]);
 
         //TODO: FOREING KEYS
