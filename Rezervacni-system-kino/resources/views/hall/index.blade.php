@@ -8,7 +8,10 @@
         <h1>K této stránce nemáte přístup</h1>
     @else
         @if (Auth::user()->role == 3 || Auth::user()->role == 2 )
-            <table class="table table-striped table-bordered table-responsive-md">
+            <input type="text" id="searchHalls" onkeyup="myFunction()" placeholder="Hledejte v sálech..">
+            <br>
+            <br>
+            <table id="halls" class="table table-striped table-bordered table-responsive-md">
                 <thead>
                 <tr>
                     <th>Jméno</th>
@@ -50,3 +53,32 @@
         @endif
     @endguest
 @endsection
+
+@push('scripts')
+    <script>
+        function myFunction() {
+
+            let input, filter, table, tr, td, i, j, cell;
+            input = document.getElementById("searchHalls");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("halls");
+            tr = table.getElementsByTagName("tr");
+
+            for (i = 1; i < tr.length; i++) {
+
+                tr[i].style.display = "none";
+
+                td = tr[i].getElementsByTagName("td");
+                for (j = 0; j < td.length -1; j++) {
+                    cell = tr[i].getElementsByTagName("td")[j];
+                    if (cell) {
+                        if (cell.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+@endpush
