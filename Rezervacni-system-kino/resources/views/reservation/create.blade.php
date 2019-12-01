@@ -48,6 +48,8 @@
             </table>
         </div>
 
+        <h4>Cena za jeden lístek: {{$performance->price}}</h4>
+        <br>
         <input type="hidden" name="hall_id" id="hall_id" value="{{ $hall->id }}" />
         <input type="hidden" name="performance_id" id="performance_id" value="{{ $performance->id }}" />
 
@@ -68,7 +70,7 @@
             </div>
 
             <div class="form-group">
-                <label for="email">E-email *</label>
+                <label for="email">Email *</label>
                 <input type="text" name="email" id="email" class="form-control" value="{{ old('email') }}" />
             </div>
 

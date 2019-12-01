@@ -71,10 +71,9 @@ class ReservationController extends Controller
      */
     public function store(Request $request)
     {
-
         if($request->first_name){
             $this->validate($request, [
-                'seats' => ['required'],
+                'seats' => ['required', 'array', 'max:10'],
                 'hall_id' => ['required'],
                 'performance_id' => ['required'],
                 'first_name' => ['required', 'min:1', 'max:30'],
@@ -204,15 +203,10 @@ class ReservationController extends Controller
     public function update(Request $request, Reservation $reservation)
     {
         $this->validate($request, [
-            'seats' => ['required']
+            'seats' => ['required', 'array', 'max:10']
         ]);
 
-        //TODO: FOREING KEYS
-        $reservation->seats = $request->input('seats');
-        $reservation->user_id = 1;
-        $reservation->hall_id = 1;
-        $reservation->performance_id = 1;
-        $reservation->save();
+        $reservation->update(['seats' => $request->input('seats')]);
 
         return redirect()->route('reservation.index');
     }

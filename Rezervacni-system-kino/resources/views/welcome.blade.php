@@ -16,7 +16,6 @@
             <a href="{{ route('piece.show', ['piece' => $piece]) }}">
                 <img src="{{asset('img/'.$piece->image)}}" alt="$piece->name" height="300">
             </a>
-            <p class="piece-content mb-1">{{ $piece->description }}</p>
 
         </div>
     @empty

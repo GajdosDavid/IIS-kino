@@ -17,7 +17,7 @@ class CreatePiecesTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('type')->nullable();
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->string('genre')->nullable();
             $table->string('performer')->nullable();
             $table->string('image');
