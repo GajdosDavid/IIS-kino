@@ -18,6 +18,7 @@ class CreatePiecesTable extends Migration
             $table->string('name');
             $table->string('type')->nullable();
             $table->text('description')->nullable();
+            $table->string('length')->nullable();
             $table->string('genre')->nullable();
             $table->string('performer')->nullable();
             $table->string('image');

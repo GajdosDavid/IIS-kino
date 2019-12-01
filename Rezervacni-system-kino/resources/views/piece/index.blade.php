@@ -42,7 +42,7 @@
                 @empty
                     <tr>
                         <td colspan="5" class="text-center">
-                            Nikdo zatím nevytvořil žádné kulturní dílo.
+                            Nikdo zatím nevytvořil žádné kulturní dílo s naplánovanou událostí.
                         </td>
                     </tr>
                 @endforelse

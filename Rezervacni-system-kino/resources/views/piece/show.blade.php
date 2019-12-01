@@ -12,6 +12,7 @@
     <br><br>
     <p>typ: {!! $piece->type !!}</p>
     <p>popis: {!! $piece->description !!}</p>
+    <p>délka: {!! $piece->length !!}</p>
     <p>žánr: {!! $piece->genre !!}</p>
     <p>účinkující: {!! $piece->performer !!}</p>
 
