@@ -7,34 +7,37 @@
     @guest
         <h1>K této stránce nemáte přístup</h1>
     @else
-        <h1>Editace uživatele {{ Auth::user()->first_name. " ".Auth::user()->surname }}</h1>
+        <div class="administration-form">
+            <br>
+            <h1>Editace uživatele {{ Auth::user()->first_name. " ".Auth::user()->surname }}</h1>
 
-        <form action="{{ route('change.password') }}" method="POST" >
-            @csrf
+            <form action="{{ route('change.password') }}" method="POST" >
+                @csrf
 
-            <div class="form-group">
-                <label for="current_password">Stávající heslo *</label>
-                <input id="current_password" type="password" class="form-control" name="current_password" autocomplete="current-password">
-            </div>
+                <div class="form-group">
+                    <label for="current_password">Stávající heslo *</label>
+                    <input id="current_password" type="password" class="form-control" name="current_password" autocomplete="current-password">
+                </div>
 
-            <div class="form-group">
-                <label for="password">Heslo *</label>
-                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                <div class="form-group">
+                    <label for="password">Heslo *</label>
+                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
 
-                @error('password')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-                @enderror
-            </div>
+                    @error('password')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
 
-            <div class="form-group">
-                <label for="password-confirm">Potvrdit heslo *</label>
-                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-            </div>
+                <div class="form-group">
+                    <label for="password-confirm">Potvrdit heslo *</label>
+                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                </div>
 
-            <button type="submit" class="btn btn-primary">Uložit heslo</button>
-        </form>
+                <button type="submit" class="btn btn-primary">Uložit heslo</button>
+            </form>
+        </div>
     @endguest
 @endsection
 
