@@ -9,8 +9,8 @@
     @else
         <div class="administration-form">
             <br>
-            <h1>Editace uživatele {{ Auth::user()->first_name. " ".Auth::user()->surname }}</h1>
-
+            <h1>Změna hesla uživatele {{ Auth::user()->first_name. " ".Auth::user()->surname }}</h1>
+            <br>
             <form action="{{ route('change.password') }}" method="POST" >
                 @csrf
 

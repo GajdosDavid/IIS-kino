@@ -13,13 +13,6 @@
                 <input type="text" id="searchReservations" onkeyup="searchTable()" placeholder="Hledejte v rezervacích..">
                 <br>
                 <br>
-                <select>
-                    @foreach($halls as $hall)
-                        <option name="hallSelect" value="{{$hall->id}}">{{$hall->name}}</option>
-                    @endforeach
-                </select>
-                <br>
-                <br>
                 <table id="reservations" class="table table-striped table-bordered table-responsive-md">
                     <thead>
                     <tr>

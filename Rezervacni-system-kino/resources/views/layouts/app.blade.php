@@ -16,7 +16,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md menu-block">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     Kinema City
@@ -44,17 +44,17 @@
                                 </li>
                             @endif
                         @else
-                            <a class="p-2 text-dark" href="{{ route('reservation.myReservations') }}">Moje rezervace</a>
+                            <a class="p-2" href="{{ route('reservation.myReservations') }}">Moje rezervace</a>
                             @if (Auth::user()->role == 3)
-                                <a class="p-2 text-dark" href="{{ route('user.index') }}">Správa uživatelů</a>
+                                <a class="p-2" href="{{ route('user.index') }}">Správa uživatelů</a>
                             @endif
                             @if (Auth::user()->role == 3 || Auth::user()->role == 2 )
-                                <a class="p-2 text-dark" href="{{ route('performance.index') }}">Správa událostí</a>
-                                <a class="p-2 text-dark" href="{{ route('piece.index') }}">Správa kulturních děl</a>
-                                <a class="p-2 text-dark" href="{{ route('hall.index') }}">Správa sálů</a>
+                                <a class="p-2" href="{{ route('performance.index') }}">Správa událostí</a>
+                                <a class="p-2" href="{{ route('piece.index') }}">Správa kulturních děl</a>
+                                <a class="p-2" href="{{ route('hall.index') }}">Správa sálů</a>
                             @endif
                             @if (Auth::user()->role == 3 || Auth::user()->role == 1 )
-                                <a class="p-2 text-dark" href="{{ route('reservation.index') }}">Správa rezervací</a>
+                                <a class="p-2" href="{{ route('reservation.index') }}">Správa rezervací</a>
                             @endif
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -88,14 +88,15 @@
             </div>
         </nav>
         <div  class="info-container">
-            @if ($errors->any())
-                <ul >
+            @if ($errors->any() && !(Request::is('createOnPerformance/*')) )
+                <ul class="default-errors">
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
                     @endforeach
                 </ul>
             @endif
             @yield('content')
+            
         </div>
         @yield('footer')
         @stack('scripts')
