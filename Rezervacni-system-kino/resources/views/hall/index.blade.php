@@ -29,27 +29,8 @@
                             <td>
                                 <a href="{{ route('hall.show', ['hall' => $hall]) }}">Detail</a>
                                 <a href="{{ route('hall.edit', ['hall' => $hall]) }}">Editovat</a>
+                                <a href="#" onclick="event.preventDefault(); $('#hall-delete-{{ $hall->id }}').submit();">Odstranit</a>
 
-                                <a href="#popup">Odstranit</a>
-
-                                <div id="popup" class="popup-overlay">
-                                    <div class="popup">
-                                        <h2>Odstranit</h2>
-                                        <a class="close" href="#">&times;</a>
-                                        <br>{{$hall->name}}
-                                        <div class="content">
-                                            Opravdu chcete odstranit sál {{$hall->name}}? Budou smazány i všechny události v tomto sále!
-                                            <br>
-                                            <br>
-                                            <a href="#"  class="btn btn-danger" onclick="event.preventDefault(); $('#hall-delete-{{ $hall->id }}').submit();">
-                                                Odstranit
-                                            </a>
-                                            <a href="#"  class="btn btn-primary" class="close">
-                                                Zpět
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
 
                                 <form action="{{ route('hall.destroy', ['hall' => $hall]) }}" method="POST" id="hall-delete-{{ $hall->id }}" class="d-none">
                                     @csrf
