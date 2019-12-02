@@ -68,7 +68,7 @@
 @endsection
 
 @push('scripts')
-    <script>
+    <script type="application/javascript">
         function searchTable() {
 
             let input, filter, table, tr, td, i, j, cell;
