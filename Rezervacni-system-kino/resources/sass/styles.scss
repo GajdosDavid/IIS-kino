@@ -11,6 +11,29 @@ a, a:hover{
     color: inherit;
 }
 
+.default-errors{
+    max-width: 1000px;
+    width: 100%;
+    margin: 0 auto;
+    padding-top: 50px;
+    color: red;
+    padding: 50px;
+}
+.reservation-errors{
+    text-align: center;
+    background: red;
+    margin: 25px 0;
+    padding: 5px 10px;
+}
+
+nav.navbar.navbar-expand-md.menu-block{
+    background: $main-color;
+    color: white;
+    .navbar-nav.ml-auto a:hover{
+        color: gray;
+    }
+}
+
 .flex-row{
     display: flex;
     flex-flow: row;
@@ -437,7 +460,7 @@ a, a:hover{
                     border: solid 1px white;
                     color: white;
                     border-radius: 6px;
-                    margin-right: 10px;
+                    margin: 0 6px;
                     transition: box-shadow 0.15s, background-color 0.15s, color 0.15s;
                 }
                 .button:hover{
@@ -477,3 +500,27 @@ a, a:hover{
     height: 150px;
     width: 100%;
 }
+
+.administration td:last-child{
+    display: flex;
+    flex-flow: row;
+    border: none;
+    justify-content: center;
+}
+.administration td a{
+    padding: 0 5px;
+}
+.administration td a:not(:first-child){
+    border-left: solid 1px black;
+}
+
+.administration a:hover{
+    text-decoration: underline;
+}
+
+
+
+
+
+
+

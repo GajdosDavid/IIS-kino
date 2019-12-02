@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Kino jak sviňa')
+@section('title', 'Kinema City')
 @section('description', 'Kino pro pravé brňáky')
 
 @section('content')

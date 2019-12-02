@@ -66,6 +66,16 @@
                         </div>
                     </div>
                 </div>
+
+                @if ($errors->any())
+                    <ul class="reservation-errors">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                @endif
+
+
                 @guest
                 <div class="guest">
                     <div class="form-group flex-row">
