@@ -10,7 +10,7 @@
         @if (Auth::user()->role == 3)
             <div class="administration">
                 <br>
-                <input type="text" id="searchUsers" onkeyup="myFunction()" placeholder="Hledejte v uživatelích...">
+                <input type="text" id="searchUsers" onkeyup="searchTable()" placeholder="Hledejte v uživatelích...">
                 <br>
                 <br>
                 <table class="table table-striped table-bordered table-responsive-md">

@@ -40,7 +40,7 @@
                     <img src="{{asset('img/'.$piece->image)}}" alt="$piece->name" class="image">
                 </a>
             @empty
-                <p>Zatím se zde nenachází žádné kulturní dílo.</p>
+                <p style="color:white">Zatím se zde nenachází žádné kulturní dílo.</p>
             @endforelse
         </div>
     </div>

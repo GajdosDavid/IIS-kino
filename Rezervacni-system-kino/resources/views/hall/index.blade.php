@@ -10,7 +10,7 @@
         @if (Auth::user()->role == 3 || Auth::user()->role == 2 )
             <div class="administration">
                 <br>
-                <input type="text" id="searchHalls" onkeyup="myFunction()" placeholder="Hledejte v sálech..">
+                <input type="text" id="searchHalls" onkeyup="searchTable()" placeholder="Hledejte v sálech..">
                 <br>
                 <br>
                 <table id="halls" class="table table-striped table-bordered table-responsive-md">
@@ -30,6 +30,7 @@
                                 <a href="{{ route('hall.show', ['hall' => $hall]) }}">Detail</a>
                                 <a href="{{ route('hall.edit', ['hall' => $hall]) }}">Editovat</a>
                                 <a href="#" onclick="event.preventDefault(); $('#hall-delete-{{ $hall->id }}').submit();">Odstranit</a>
+
 
                                 <form action="{{ route('hall.destroy', ['hall' => $hall]) }}" method="POST" id="hall-delete-{{ $hall->id }}" class="d-none">
                                     @csrf
@@ -59,7 +60,7 @@
 
 @push('scripts')
     <script>
-        function myFunction() {
+        function searchTable() {
 
             let input, filter, table, tr, td, i, j, cell;
             input = document.getElementById("searchHalls");

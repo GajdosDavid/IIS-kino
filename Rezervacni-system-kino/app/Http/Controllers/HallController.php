@@ -115,6 +115,10 @@ class HallController extends Controller
     public function destroy(Hall $hall)
     {
         try {
+            foreach($hall->performances as $perf){
+                $perf->delete();
+            }
+
             $hall->delete();
         } catch (Exception $exception) {
             return redirect()->back()->withErrors(['Při odstranění sálu došlo k chybě.']);

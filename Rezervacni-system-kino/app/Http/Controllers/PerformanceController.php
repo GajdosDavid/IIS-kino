@@ -53,6 +53,15 @@ class PerformanceController extends Controller
             'hall' => ['required']
         ]);
 
+        if($request->date <  date("Y-m-d")){
+            return redirect()->back()->withErrors(['Zadaný datum a čas musí být větši než aktuální']);
+        }
+        else if($request->date ==  date("Y-m-d")){
+            if($request->beginning < date("G:i")){
+                return redirect()->back()->withErrors(['Zadaný datum a čas musí být větši než aktuální']);
+            }
+        }
+
         foreach($request->input('hall') as $hall_id){
             $hall = Hall::find($hall_id);
             foreach($hall->performances as $perf){
@@ -126,6 +135,15 @@ class PerformanceController extends Controller
             'piece' => ['required'],
             'hall' => ['required']
         ]);
+
+        if($request->date <  date("Y-m-d")){
+            return redirect()->back()->withErrors(['Zadaný datum a čas musí být větši než aktuální']);
+        }
+        else if($request->date ==  date("Y-m-d")){
+            if($request->beginning < date("G:i")){
+                return redirect()->back()->withErrors(['Zadaný datum a čas musí být větši než aktuální']);
+            }
+        }
 
         foreach($request->input('hall') as $hall_id){
             $hall = Hall::find($hall_id);
