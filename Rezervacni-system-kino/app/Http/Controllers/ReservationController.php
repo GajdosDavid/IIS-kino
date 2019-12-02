@@ -79,7 +79,7 @@ class ReservationController extends Controller
                 'first_name' => ['required', 'min:1', 'max:30'],
                 'surname' => ['required', 'min:1', 'max:30'],
                 'phone' => ['nullable', 'min:4', 'max:20'],
-                'email' => ['required', 'email', 'unique:users'],
+                'email' => ['required', 'email', 'unique:users', 'max:255'],
             ]);
 
             $reservation = new Reservation();
@@ -118,7 +118,7 @@ class ReservationController extends Controller
 
         $reservation->save();
 
-        return redirect('/');
+        return redirect('/')->with('message', 'Rezervace úspěšně vytvořena');
     }
 
     /**

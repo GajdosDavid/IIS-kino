@@ -8,46 +8,49 @@
         <h1>K této stránce nemáte přístup</h1>
     @else
         @if (Auth::user()->role == 3 || Auth::user()->role == 2 )
-            <input type="text" id="searchHalls" onkeyup="myFunction()" placeholder="Hledejte v sálech..">
-            <br>
-            <br>
-            <table id="halls" class="table table-striped table-bordered table-responsive-md">
-                <thead>
-                <tr>
-                    <th>Jméno</th>
-                    <th>Adresa</th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                @forelse ($halls as $hall)
+            <div class="administration">
+                <br>
+                <input type="text" id="searchHalls" onkeyup="myFunction()" placeholder="Hledejte v sálech..">
+                <br>
+                <br>
+                <table id="halls" class="table table-striped table-bordered table-responsive-md">
+                    <thead>
                     <tr>
-                        <td>{{ $hall->name }}</td>
-                        <td>{{ $hall->address }}</td>
-                        <td>
-                            <a href="{{ route('hall.show', ['hall' => $hall]) }}">Detail</a>
-                            <a href="{{ route('hall.edit', ['hall' => $hall]) }}">Editovat</a>
-                            <a href="#" onclick="event.preventDefault(); $('#hall-delete-{{ $hall->id }}').submit();">Odstranit</a>
-
-                            <form action="{{ route('hall.destroy', ['hall' => $hall]) }}" method="POST" id="hall-delete-{{ $hall->id }}" class="d-none">
-                                @csrf
-                                @method('DELETE')
-                            </form>
-                        </td>
+                        <th>Jméno</th>
+                        <th>Adresa</th>
+                        <th></th>
                     </tr>
-                @empty
-                    <tr>
-                        <td colspan="5" class="text-center">
-                            Nikdo zatím nevytvořil žádný sál.
-                        </td>
-                    </tr>
-                @endforelse
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    @forelse ($halls as $hall)
+                        <tr>
+                            <td>{{ $hall->name }}</td>
+                            <td>{{ $hall->address }}</td>
+                            <td>
+                                <a href="{{ route('hall.show', ['hall' => $hall]) }}">Detail</a>
+                                <a href="{{ route('hall.edit', ['hall' => $hall]) }}">Editovat</a>
+                                <a href="#" onclick="event.preventDefault(); $('#hall-delete-{{ $hall->id }}').submit();">Odstranit</a>
 
-            <a href="{{ route('hall.create') }}" class="btn btn-primary">
-                Vytvořit nový sál
-            </a>
+                                <form action="{{ route('hall.destroy', ['hall' => $hall]) }}" method="POST" id="hall-delete-{{ $hall->id }}" class="d-none">
+                                    @csrf
+                                    @method('DELETE')
+                                </form>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="5" class="text-center">
+                                Nikdo zatím nevytvořil žádný sál.
+                            </td>
+                        </tr>
+                    @endforelse
+                    </tbody>
+                </table>
+
+                <a href="{{ route('hall.create') }}" class="btn btn-primary">
+                    Vytvořit nový sál
+                </a>
+            </div>
         @else
             <h1>K této stránce nemáte přístup</h1>
         @endif

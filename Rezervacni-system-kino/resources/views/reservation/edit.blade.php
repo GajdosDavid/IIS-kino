@@ -8,56 +8,60 @@
         <h1>K této stránce nemáte přístup</h1>
     @else
         @if (Auth::user()->role == 3 || Auth::user()->role == 1 )
-            <h1>Editace rezervace na událost {{ $reservation->performance->piece->name }}</h1>
+            <div class="administration-form">
+                <br>
+                <h1>Editace rezervace na událost {{ $reservation->performance->piece->name }}</h1>
+                <br>
 
-            <form action="{{ route('reservation.update', ['reservation' => $reservation]) }}" method="POST">
-                @csrf
-                @method('PUT')
+                <form action="{{ route('reservation.update', ['reservation' => $reservation]) }}" method="POST">
+                    @csrf
+                    @method('PUT')
 
-                <div class="form-group">
-                    <h2>Sál {{$reservation->hall->name}}</h2>
-                    <br>
-                    <table>
-                        <col width="30">
-                        @for( $seat = 1; $seat <= $reservation->hall->seats_in_row ; $seat++)
-                            <col width="25">
-                        @endfor
-                        <thead align="center">
-                        <tr>
-                            <th></th>
+                    <div class="form-group">
+                        <h2>Sál {{$reservation->hall->name}}</h2>
+                        <br>
+                        <table>
+                            <col width="30">
                             @for( $seat = 1; $seat <= $reservation->hall->seats_in_row ; $seat++)
-                                <th>{{$seat}}</th>
+                                <col width="25">
                             @endfor
-                        </tr>
-                        </thead>
-                        <tbody align="center">
-                        @for( $row = 1; $row <= $reservation->hall->rows ; $row++)
+                            <thead align="center">
                             <tr>
-                                <td>{{$row}}</td>
+                                <th></th>
                                 @for( $seat = 1; $seat <= $reservation->hall->seats_in_row ; $seat++)
-                                    @if( in_array("$row,$seat", $reservedSeats) && !in_array("$row,$seat", $reservation->seats))
-                                        <td style="background: red; border: 5px solid #FFFFFF; "/>
-                                    @else
-                                        <td>
-                                            <input type="checkbox" name="seats[]" id="seats[]" value="{{$row}},{{$seat}}"
-                                            {{ in_array("$row,$seat", $reservation->seats) ? 'checked' : '' }}>
-                                        </td>
-                                    @endif
+                                    <th>{{$seat}}</th>
                                 @endfor
                             </tr>
-                        @endfor
-                        </tbody>
-                    </table>
-                </div>
+                            </thead>
+                            <tbody align="center">
+                            @for( $row = 1; $row <= $reservation->hall->rows ; $row++)
+                                <tr>
+                                    <td>{{$row}}</td>
+                                    @for( $seat = 1; $seat <= $reservation->hall->seats_in_row ; $seat++)
+                                        @if( in_array("$row,$seat", $reservedSeats) && !in_array("$row,$seat", $reservation->seats))
+                                            <td style="background: red; border: 5px solid #FFFFFF; "/>
+                                        @else
+                                            <td>
+                                                <input type="checkbox" name="seats[]" id="seats[]" value="{{$row}},{{$seat}}"
+                                                    {{ in_array("$row,$seat", $reservation->seats) ? 'checked' : '' }}>
+                                            </td>
+                                        @endif
+                                    @endfor
+                                </tr>
+                            @endfor
+                            </tbody>
+                        </table>
+                    </div>
 
-                <h4>Cena za jeden lístek: {{$reservation->performance->price}}</h4>
-                <br>
-                <label for="is_paid">Zaplaceno</label>
-                <input type="checkbox"  name="is_paid" id="is_paid" value="true" {{$reservation->is_paid ? 'checked' : ''}}>
-                <br>
-                <br>
-                <button type="submit" class="btn btn-primary">Uložit rezervaci</button>
-            </form>
+                    <h4>Cena za jeden lístek: {{$reservation->performance->price}}</h4>
+                    <br>
+                    <label for="is_paid">Zaplaceno</label>
+                    <input type="checkbox"  name="is_paid" id="is_paid" value="true" {{$reservation->is_paid ? 'checked' : ''}}>
+                    <br>
+                    <br>
+                    <button type="submit" class="btn btn-primary">Uložit rezervaci</button>
+                </form>
+            </div>
         @else
             <h1>K této stránce nemáte přístup</h1>
         @endif

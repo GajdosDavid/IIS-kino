@@ -4,21 +4,54 @@
 @section('description', 'Kino pro pravé brňáky')
 
 @section('content')
-    <h1 class="text-center mb-4">Kino jak sviňa</h1>
 
-    @forelse ($pieces as $piece)
-        <div class="piece mb-5">
-            <header>
-                <h2>
-                    <a href="{{ route('piece.show', ['piece' => $piece]) }}">{{ $piece->name }}</a>
-                </h2>
-            </header>
-            <a href="{{ route('piece.show', ['piece' => $piece]) }}">
-                <img src="{{asset('img/'.$piece->image)}}" alt="$piece->name" height="300">
-            </a>
+<section id="home flex-column">
+    <h1 class="header-cinema">KINEMA CITY</h1>
+    <div class="shade">
+        <div class="panel flex-row">
 
+
+            @foreach($pieces as $piece)
+            <div class="image-block">
+                <img src="{{asset('img/'.$piece->image)}}" alt="$piece->name" class="image">
+            </div>
+
+            @endforeach
         </div>
-    @empty
-        <p>Zatím se zde nenachází žádné kulturní dílo.</p>
-    @endforelse
+    </div>
+
+
+
+    <div class="pieces flex-column">
+        <div class="header">
+            <h2>Nejnovější představení a filmy</h2>
+        </div>
+        <div class="concrete flex-row">
+            @forelse ($pieces as $piece)
+
+                <a href="{{ route('piece.show', ['piece' => $piece]) }}" class="block">
+                    <div class="overlay">
+                        <h3 class="name">{{$piece->name}}</h3>
+                        <p class="type">{{$piece->type}}</p>
+                        <p class="desc">{{$piece->description}}</p>
+                        <p class="genre">{{$piece->genre}}</p>
+                    </div>
+
+                    <img src="{{asset('img/'.$piece->image)}}" alt="$piece->name" class="image">
+                </a>
+            @empty
+                <p>Zatím se zde nenachází žádné kulturní dílo.</p>
+            @endforelse
+        </div>
+    </div>
+
+
+</section>
+
+@endsection
+
+@section('footer')
+    <div class="footer-main">
+
+    </div>
 @endsection

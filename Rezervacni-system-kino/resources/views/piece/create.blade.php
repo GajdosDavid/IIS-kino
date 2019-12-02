@@ -8,48 +8,52 @@
         <h1>K této stránce nemáte přístup</h1>
     @else
         @if (Auth::user()->role == 3 || Auth::user()->role == 2 )
-            <h1>Tvorba kulturního díla</h1>
+            <div class="administration-form">
+                <br>
+                <h1>Tvorba kulturního díla</h1>
+                <br>
 
-            <form action="{{ route('piece.store') }}" method="POST" enctype="multipart/form-data">
-                @csrf
+                <form action="{{ route('piece.store') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
 
-                <div class="form-group">
-                    <label for="name">Název *</label>
-                    <input type="text" name="name" id="name" class="form-control" value="{{ old('name') }}" required minlength="1" maxlength="300" />
-                </div>
+                    <div class="form-group">
+                        <label for="name">Název *</label>
+                        <input type="text" name="name" id="name" class="form-control" value="{{ old('name') }}" required minlength="1" maxlength="255" />
+                    </div>
 
-                <div class="form-group">
-                    <label for="type">Druh</label>
-                    <input type="text" name="type" id="type" class="form-control" value="{{ old('type') }}" minlength="1" maxlength="50" />
-                </div>
+                    <div class="form-group">
+                        <label for="type">Druh</label>
+                        <input type="text" name="type" id="type" class="form-control" value="{{ old('type') }}" minlength="1" maxlength="50" />
+                    </div>
 
-                <div class="form-group">
-                    <label for="description">Popis</label>
-                    <textarea name="description" id="description" class="form-control" rows="3">{{ old('description') }}</textarea>
-                </div>
+                    <div class="form-group">
+                        <label for="description">Popis</label>
+                        <textarea name="description" id="description" class="form-control" rows="3">{{ old('description') }}</textarea>
+                    </div>
 
-                <div class="form-group">
-                    <label for="length">Délka v minutách</label>
-                    <input type="text" name="length" id="length" class="form-control" value="{{ old('length') }}" minlength="1" maxlength="50" />
-                </div>
+                    <div class="form-group">
+                        <label for="length">Délka v minutách</label>
+                        <input type="text" name="length" id="length" class="form-control" value="{{ old('length') }}" minlength="1" maxlength="50" />
+                    </div>
 
-                <div class="form-group">
-                    <label for="genre">Žánr</label>
-                    <input type="text" name="genre" id="genre" class="form-control" value="{{ old('genre') }}" minlength="1" maxlength="50" />
-                </div>
+                    <div class="form-group">
+                        <label for="genre">Žánr</label>
+                        <input type="text" name="genre" id="genre" class="form-control" value="{{ old('genre') }}" minlength="1" maxlength="255" />
+                    </div>
 
-                <div class="form-group">
-                    <label for="performer">Účinkující</label>
-                    <input type="text" name="performer" id="performer" class="form-control" value="{{ old('performer') }}" minlength="1" maxlength="500" />
-                </div>
+                    <div class="form-group">
+                        <label for="performer">Účinkující</label>
+                        <input type="text" name="performer" id="performer" class="form-control" value="{{ old('performer') }}" minlength="1" maxlength="255" />
+                    </div>
 
-                <div class="form-group">
-                    <label for="image">Obrázek *</label>
-                    <input type="file" name="image" id="image" class="form-control" value="{{ old('image') }}" />
-                </div>
+                    <div class="form-group">
+                        <label for="image">Obrázek *</label>
+                        <input type="file" name="image" id="image" class="form-control" value="{{ old('image') }}" />
+                    </div>
 
-                <button type="submit" class="btn btn-primary">Vytvořit kulturní dílo</button>
-            </form>
+                    <button type="submit" class="btn btn-primary">Vytvořit kulturní dílo</button>
+                </form>
+            </div>
         @else
             <h1>K této stránce nemáte přístup</h1>
         @endif
