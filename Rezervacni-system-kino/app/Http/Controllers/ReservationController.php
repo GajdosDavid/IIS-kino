@@ -71,7 +71,6 @@ class ReservationController extends Controller
      */
     public function store(Request $request)
     {
-        dd( $request->input('seats'));
         if($request->first_name){
             $this->validate($request, [
                 'seats' => ['required', 'array', 'max:10'],
