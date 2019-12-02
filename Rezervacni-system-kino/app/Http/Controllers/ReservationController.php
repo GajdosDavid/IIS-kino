@@ -71,6 +71,7 @@ class ReservationController extends Controller
      */
     public function store(Request $request)
     {
+        dd( $request->input('seats'));
         if($request->first_name){
             $this->validate($request, [
                 'seats' => ['required', 'array', 'max:10'],
@@ -90,7 +91,7 @@ class ReservationController extends Controller
         }
         else{
             $this->validate($request, [
-                'seats' => ['required'],
+                'seats' => ['required', 'array', 'max:10'],
                 'user_id' => ['required'],
                 'hall_id' => ['required'],
                 'performance_id' => ['required']
@@ -216,7 +217,7 @@ class ReservationController extends Controller
             return redirect()->back()->withErrors(['Při odstranění rezervace došlo k chybě.']);
         }
 
-        return redirect()->route('reservation.index');
+        return redirect()->back();
     }
 
     public function pay(Request $request, Reservation $reservation)
