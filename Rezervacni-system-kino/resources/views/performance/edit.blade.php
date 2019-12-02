@@ -50,8 +50,8 @@
                     <label for="hall[]">Sály *</label>
                     <br>
                     @forelse ($halls as $hall)
-                        <input type="checkbox" name="hall[]" id="hall[]" value="{{$hall->id}}" {{ $performance->halls->contains('id', $hall->id) ? 'checked' : '' }}>
-                        <label for="hall[]">{{$hall->name}}</label><br>
+                        <input type="checkbox" name="hall[]" id="hall[{{$hall->id}}]" value="{{$hall->id}}" {{ $performance->halls->contains('id', $hall->id) ? 'checked' : '' }}>
+                        <label for="hall[{{$hall->id}}]">{{$hall->name}}</label><br>
                     @empty
                         <p style="color:#FF0000">Žádné sály ještě nebyly vytvořeny!</p>
                     @endforelse

@@ -8,5 +8,10 @@
     začátek: {!! $performance->beginning !!}<br>
     konec: {!! $performance->end !!}<br>
     cena: {!! $performance->price !!}<br>
+    sály:<br>
+    @foreach($performance->halls as $hall)
+        {{$hall->name}}<br>
+    @endforeach
+
 
 @endsection

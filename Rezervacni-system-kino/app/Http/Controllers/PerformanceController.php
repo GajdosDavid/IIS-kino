@@ -53,7 +53,23 @@ class PerformanceController extends Controller
             'hall' => ['required']
         ]);
 
+        foreach($request->input('hall') as $hall_id){
+            $hall = Hall::find($hall_id);
+            foreach($hall->performances as $perf){
+                if($request->input('date') == $perf->date){
+                    $beginning = date('G:i', strtotime($perf->beginning));
+                    $end = date('G:i', strtotime($perf->end));
 
+                    if( (( $request->input('beginning') >= $beginning) && ( $request->input('beginning') <= $end))
+                        ||
+                        (( $request->input('date') >= $beginning) && ( $request->input('date') <= $end))
+                    )
+                    {
+                        return redirect()->back()->withErrors(['Sál '.$hall->name.' je již v dobu od '.$beginning.' do '.$end.' zabrán událostí s dílem '.$perf->piece->name]);
+                    }
+                }
+            }
+        }
 
         $performance = new Performance();
         $performance->date = $request->input('date');
@@ -110,6 +126,24 @@ class PerformanceController extends Controller
             'piece' => ['required'],
             'hall' => ['required']
         ]);
+
+        foreach($request->input('hall') as $hall_id){
+            $hall = Hall::find($hall_id);
+            foreach($hall->performances as $perf){
+                if($request->input('date') == $perf->date){
+                    $beginning = date('G:i', strtotime($perf->beginning));
+                    $end = date('G:i', strtotime($perf->end));
+
+                    if( (( $request->input('beginning') >= $beginning) && ( $request->input('beginning') <= $end))
+                        ||
+                        (( $request->input('date') >= $beginning) && ( $request->input('date') <= $end))
+                    )
+                    {
+                        return redirect()->back()->withErrors(['Sál '.$hall->name.' je již v dobu od '.$beginning.' do '.$end.' zabrán událostí s dílem '.$perf->piece->name]);
+                    }
+                }
+            }
+        }
 
         $performance->date = $request->input('date');
         $performance->beginning = $request->input('beginning');

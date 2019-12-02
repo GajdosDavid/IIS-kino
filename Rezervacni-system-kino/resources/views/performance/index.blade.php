@@ -17,6 +17,7 @@
                     <th>Jméno díla</th>
                     <th>Datum</th>
                     <th>Začátek</th>
+                    <th>Konec</th>
                     <th>Sály</th>
                     <th></th>
                 </tr>
@@ -27,6 +28,7 @@
                         <td>{{ $pieces->find($performance->piece_id)->name}}</td>
                         <td>{{ $performance->date }}</td>
                         <td>{{ date('G:i', strtotime($performance->beginning)) }}</td>
+                        <td>{{ date('G:i', strtotime($performance->end)) }}</td>
                         <td>
                             @foreach ($performance->halls as $hall)
                                 {{ $hall->name}}<br>
