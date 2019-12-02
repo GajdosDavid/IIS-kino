@@ -49,7 +49,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="5" class="text-center">
+                            <td colspan="6" class="text-center">
                                 Nikdo zatím nevytvořil žádnou událost.
                             </td>
                         </tr>
