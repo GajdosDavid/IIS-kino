@@ -118,7 +118,7 @@ class ReservationController extends Controller
 
         $reservation->save();
 
-        return redirect('/');
+        return redirect('/')->with('message', 'Rezervace úspěšně vytvořena');
     }
 
     /**

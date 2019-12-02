@@ -8,48 +8,52 @@
         <h1>K této stránce nemáte přístup</h1>
     @else
         @if (Auth::user()->id == $user->id || Auth::user()->role == 3)
-            <h1>Editace uživatele {{ $user->first_name. " ".$user->surname }}</h1>
+            <div class="administration-form">
+                <br>
+                <h1>Editace uživatele {{ $user->first_name. " ".$user->surname }}</h1>
+                <br>
 
-            <form action="{{ route('user.update', ['user' => $user]) }}" method="POST">
-                @csrf
-                @method('PUT')
+                <form action="{{ route('user.update', ['user' => $user]) }}" method="POST">
+                    @csrf
+                    @method('PUT')
 
-                <div class="form-group">
-                    <label for="first_name">Jméno *</label>
-                    <input type="text" name="first_name" id="first_name" class="form-control" value="{{ old('first_name') ?: $user->first_name }}" required minlength="1" maxlength="30" />
-                </div>
-
-                <div class="form-group">
-                    <label for="surname">Přijmení *</label>
-                    <input type="text" name="surname" id="surname" class="form-control" value="{{ old('surname') ?: $user->surname }}" required minlength="1" maxlength="30" />
-                </div>
-
-                <div class="form-group">
-                    <label for="phone">Telefonní číslo</label>
-                    <input type="text" name="phone" id="phone" class="form-control" value="{{ old('phone') ?: $user->phone }}" minlength="4" maxlength="20" />
-                </div>
-
-                @if (Auth::user()->role == 3)
                     <div class="form-group">
-                        <label for="role">Role *</label>
-                        <select name="role" id="role" class="form-control" >
-                            <option value="0" {{ ($user->role == 0) ? "selected" : ""}}>Divák</option>
-                            <option value="1" {{ ($user->role == 1) ? "selected" : ""}}>Pokladní</option>
-                            <option value="2" {{ ($user->role == 2) ? "selected" : ""}}>Redaktor</option>
-                            <option value="3" {{ ($user->role == 3) ? "selected" : ""}}>Admin</option>
-                        </select>
+                        <label for="first_name">Jméno *</label>
+                        <input type="text" name="first_name" id="first_name" class="form-control" value="{{ old('first_name') ?: $user->first_name }}" required minlength="1" maxlength="30" />
                     </div>
-                @endif
 
-                <button type="submit" class="btn btn-primary">Uložit uživatele</button>
-            </form>
-            <br>
-            <button class="btn btn-danger" onclick="$('#user-delete-{{ $user->id }}').submit();">Smazat účet</button>
+                    <div class="form-group">
+                        <label for="surname">Přijmení *</label>
+                        <input type="text" name="surname" id="surname" class="form-control" value="{{ old('surname') ?: $user->surname }}" required minlength="1" maxlength="30" />
+                    </div>
 
-            <form action="{{ route('user.destroy', ['user' => $user]) }}" method="POST" id="user-delete-{{ $user->id }}" class="d-none">
-                @csrf
-                @method('DELETE')
-            </form>
+                    <div class="form-group">
+                        <label for="phone">Telefonní číslo</label>
+                        <input type="text" name="phone" id="phone" class="form-control" value="{{ old('phone') ?: $user->phone }}" minlength="4" maxlength="20" />
+                    </div>
+
+                    @if (Auth::user()->role == 3)
+                        <div class="form-group">
+                            <label for="role">Role *</label>
+                            <select name="role" id="role" class="form-control" >
+                                <option value="0" {{ ($user->role == 0) ? "selected" : ""}}>Divák</option>
+                                <option value="1" {{ ($user->role == 1) ? "selected" : ""}}>Pokladní</option>
+                                <option value="2" {{ ($user->role == 2) ? "selected" : ""}}>Redaktor</option>
+                                <option value="3" {{ ($user->role == 3) ? "selected" : ""}}>Admin</option>
+                            </select>
+                        </div>
+                    @endif
+
+                    <button type="submit" class="btn btn-primary">Uložit uživatele</button>
+                </form>
+                <br>
+                <button class="btn btn-danger" onclick="$('#user-delete-{{ $user->id }}').submit();">Smazat účet</button>
+
+                <form action="{{ route('user.destroy', ['user' => $user]) }}" method="POST" id="user-delete-{{ $user->id }}" class="d-none">
+                    @csrf
+                    @method('DELETE')
+                </form>
+            </div>
         @else
             <h1>K této stránce nemáte přístup</h1>
         @endif
