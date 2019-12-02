@@ -8,7 +8,17 @@
         <h1>K této stránce nemáte přístup</h1>
     @else
         @if (Auth::user()->role == 3 || Auth::user()->role == 1 )
-            <table class="table table-striped table-bordered table-responsive-md">
+            <input type="text" id="searchReservations" onkeyup="myFunction()" placeholder="Hledejte v rezervacích..">
+            <br>
+            <br>
+            <select>
+                @foreach($halls as $hall)
+                    <option name="hallSelect" value="{{$hall->id}}">{{$hall->name}}</option>
+                @endforeach
+            </select>
+            <br>
+            <br>
+            <table id="reservations" class="table table-striped table-bordered table-responsive-md">
                 <thead>
                 <tr>
                     <th>Příjmení</th>
@@ -65,3 +75,32 @@
         @endif
     @endguest
 @endsection
+
+@push('scripts')
+    <script>
+        function myFunction() {
+
+            let input, filter, table, tr, td, i, j, cell;
+            input = document.getElementById("searchReservations");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("reservations");
+            tr = table.getElementsByTagName("tr");
+
+            for (i = 1; i < tr.length; i++) {
+
+                tr[i].style.display = "none";
+
+                td = tr[i].getElementsByTagName("td");
+                for (j = 0; j < td.length -1; j++) {
+                    cell = tr[i].getElementsByTagName("td")[j];
+                    if (cell) {
+                        if (cell.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+@endpush

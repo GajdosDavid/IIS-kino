@@ -7,6 +7,7 @@ use File;
 use Exception;
 use App\Piece;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -45,6 +46,7 @@ class PieceController extends Controller
             'name' => ['required', 'min:1', 'max:300'],
             'type' => ['nullable', 'min:1', 'max:50'],
             'description' => ['nullable', 'min:1', 'max:10000'],
+            'length' => ['nullable', 'integer', 'min:1'],
             'genre' => ['nullable', 'min:1', 'max:500'],
             'performer' => ['nullable', 'min:1', 'max:500'],
             'image' => ['required', 'image', 'max:5000']
@@ -54,6 +56,7 @@ class PieceController extends Controller
         $piece->name = $request->input('name');
         $piece->type = $request->input('type');
         $piece->description = $request->input('description');
+        $piece->length = $request->input('length');
         $piece->genre = $request->input('genre');
         $piece->performer = $request->input('performer');
 
@@ -73,9 +76,19 @@ class PieceController extends Controller
      */
     public function show(Piece $piece)
     {
-        $performance = Performance::where('piece_id', $piece->id)->orderBy('beginning')->orderBy('date')->get();
+        $performances = Performance::where('piece_id', $piece->id)->orderBy('beginning')->orderBy('date')->get();
 
-        return view('piece.show', ['piece' => $piece, 'performances' => $performance]);
+        $hallsWithPiece = collect();
+
+        foreach($performances as $performance){
+            foreach($performance->halls as $hall){
+                $hallsWithPiece->add($hall);
+            }
+        }
+
+        $hallsWithPiece = (new Collection($hallsWithPiece))->unique();
+
+        return view('piece.show', ['piece' => $piece, 'performances' => $performances, 'halls' => $hallsWithPiece]);
     }
 
     /**
@@ -102,6 +115,7 @@ class PieceController extends Controller
             'name' => ['required', 'min:1', 'max:300'],
             'type' => ['nullable', 'min:1', 'max:50'],
             'description' => ['nullable', 'min:1', 'max:10000'],
+            'length' => ['nullable', 'integer', 'min:1'],
             'genre' => ['nullable', 'min:1', 'max:500'],
             'performer' => ['nullable', 'min:1', 'max:500'],
             'image' => [ 'image', 'max:5000'],
@@ -110,6 +124,7 @@ class PieceController extends Controller
         $piece->name = $request->input('name');
         $piece->type = $request->input('type');
         $piece->description = $request->input('description');
+        $piece->length = $request->input('length');
         $piece->genre = $request->input('genre');
         $piece->performer = $request->input('performer');
 

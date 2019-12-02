@@ -30,6 +30,11 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="length">Délka v minutách</label>
+                    <input type="text" name="length" id="length" class="form-control" value="{{ old('length') ?: $piece->length }}" minlength="1" maxlength="50" />
+                </div>
+
+                <div class="form-group">
                     <label for="genre">Žánr</label>
                     <input type="text" name="genre" id="genre" class="form-control" value="{{ old('genre') ?: $piece->genre }}" minlength="1" maxlength="50" />
                 </div>
