@@ -179,11 +179,6 @@ class ReservationController extends Controller
 
         $reservedSeats = $this->getReservatedSeats($performance, $hall);
 
-        $seatsCollision = array_intersect($reservation->seats, $reservedSeats);
-        if (!empty($seatsCollision)){
-            return redirect()->back()->withErrors(['Místo nebo místa '.json_encode($seatsCollision).' jsou již zabraná.']);
-        }
-
         return view('reservation.edit', ['reservation' => $reservation, 'reservedSeats' => $reservedSeats]);
     }
 
