@@ -10,7 +10,7 @@
         @if (Auth::user()->role == 3 || Auth::user()->role == 2 )
             <div class="administration">
                 <br>
-                <input type="text" id="searchPerformances" onkeyup="myFunction()" placeholder="Hledejte v událostech..">
+                <input type="text" id="searchPerformances" onkeyup="searchTable()" placeholder="Hledejte v událostech..">
                 <br>
                 <br>
                 <table id="performances" class="table table-striped table-bordered table-responsive-md">
@@ -27,7 +27,7 @@
                     <tbody>
                     @forelse ($performances as $performance)
                         <tr>
-                            <td>{{ $pieces->find($performance->piece_id)->name}}</td>
+                            <td>{{ $performance->piece->name}}</td>
                             <td>{{ $performance->date }}</td>
                             <td>{{ date('G:i', strtotime($performance->beginning)) }}</td>
                             <td>{{ date('G:i', strtotime($performance->end)) }}</td>
@@ -69,7 +69,7 @@
 
 @push('scripts')
     <script>
-        function myFunction() {
+        function searchTable() {
 
             let input, filter, table, tr, td, i, j, cell;
             input = document.getElementById("searchPerformances");

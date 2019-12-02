@@ -10,7 +10,7 @@
         @if (Auth::user()->role == 3 || Auth::user()->role == 2 )
             <div class="administration">
                 <br>
-                <input type="text" id="searchPieces" onkeyup="myFunction()" placeholder="Hledejte v dílech...">
+                <input type="text" id="searchPieces" onkeyup="searchTable()" placeholder="Hledejte v dílech...">
                 <br>
                 <br>
                 <table id="pieces" class="table table-striped table-bordered table-responsive-md">
@@ -63,7 +63,7 @@
 
 @push('scripts')
     <script>
-        function myFunction() {
+        function searchTable() {
 
             let input, filter, table, tr, td, i, j, cell;
             input = document.getElementById("searchPieces");
