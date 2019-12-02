@@ -507,6 +507,9 @@ nav.navbar.navbar-expand-md.menu-block{
     border: none;
     justify-content: center;
 }
+.administration td:first-child{
+    display: table-cell;
+}
 .administration td a{
     padding: 0 5px;
 }
