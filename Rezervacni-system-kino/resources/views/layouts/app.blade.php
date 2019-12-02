@@ -87,9 +87,9 @@
                 </div>
             </div>
         </nav>
-        <div class="info-container">
+        <div  class="info-container">
             @if ($errors->any())
-                <ul>
+                <ul >
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
                     @endforeach
@@ -97,9 +97,7 @@
             @endif
             @yield('content')
         </div>
-        <div class="footer">
-            
-        </div>
+        @yield('footer')
         @stack('scripts')
     </div>
 </body>

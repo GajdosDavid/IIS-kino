@@ -465,3 +465,15 @@ a, a:hover{
     max-width: 1000px;
     margin: 0 auto;
 }
+
+.footer-main{
+    background: $main-color;
+    height: 150px;
+    width: 100%;
+}
+
+.footer-lighter{
+    background: $main-color-lighter;
+    height: 150px;
+    width: 100%;
+}

@@ -127,9 +127,12 @@
             </form>
         </div>
     </div>
+@endsection
 
+@section('footer')
+    <div class="footer-lighter">
 
-
+    </div>
 @endsection
 
 @push('scripts')
