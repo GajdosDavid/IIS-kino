@@ -5,7 +5,6 @@
 
 @section('content')
 
-
 <div class="concrete-piece flex-column">
     <div class="piece-bg">
         <img src="{{asset('img/'.$piece->image)}}" alt="$piece->name" class="image">
@@ -57,9 +56,14 @@
                     <div class="pack {{$hall->id}}">
 
                         @foreach($performances as $perf)
+
+                            @php
+                                $date = new Carbon\Carbon($perf->date)
+                            @endphp
+
                             @if ($perf->halls()->where('hall_id', $hall->id)->exists())
                             <a class="perf flex-row" href="{{ route('reservation.createOnPerformance', [$perf->id, $hall->id]) }}" >
-                                <p class="item">{{$perf->date}}</p>
+                                <p class="item">{{$date->isoFormat('LL')}}</p>
                                 <p class="item">{{ date('G:i', strtotime($perf->beginning)) }}</p>
                                 <p class="item">{{$perf->price}},-</p>
                                 <div class="item">
