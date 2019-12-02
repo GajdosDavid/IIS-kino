@@ -71,7 +71,7 @@
 
             <div class="form-group">
                 <label for="email">Email *</label>
-                <input type="text" name="email" id="email" class="form-control" value="{{ old('email') }}" />
+                <input type="text" name="email" id="email" class="form-control" value="{{ old('email') }}" maxlength="255"/>
             </div>
 
             <div class="form-group">

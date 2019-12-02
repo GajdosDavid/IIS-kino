@@ -43,12 +43,12 @@ class PieceController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => ['required', 'min:1', 'max:300'],
+            'name' => ['required', 'min:1', 'max:255'],
             'type' => ['nullable', 'min:1', 'max:50'],
             'description' => ['nullable', 'min:1', 'max:10000'],
             'length' => ['nullable', 'integer', 'min:1'],
-            'genre' => ['nullable', 'min:1', 'max:500'],
-            'performer' => ['nullable', 'min:1', 'max:500'],
+            'genre' => ['nullable', 'min:1', 'max:255'],
+            'performer' => ['nullable', 'min:1', 'max:255'],
             'image' => ['required', 'image', 'max:5000']
         ]);
 
@@ -112,12 +112,12 @@ class PieceController extends Controller
     public function update(Request $request, Piece $piece)
     {
         $this->validate($request, [
-            'name' => ['required', 'min:1', 'max:300'],
+            'name' => ['required', 'min:1', 'max:255'],
             'type' => ['nullable', 'min:1', 'max:50'],
             'description' => ['nullable', 'min:1', 'max:10000'],
             'length' => ['nullable', 'integer', 'min:1'],
-            'genre' => ['nullable', 'min:1', 'max:500'],
-            'performer' => ['nullable', 'min:1', 'max:500'],
+            'genre' => ['nullable', 'min:1', 'max:255'],
+            'performer' => ['nullable', 'min:1', 'max:255'],
             'image' => [ 'image', 'max:5000'],
         ]);
 

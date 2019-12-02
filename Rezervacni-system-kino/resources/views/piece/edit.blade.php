@@ -16,7 +16,7 @@
 
                 <div class="form-group">
                     <label for="name">Název *</label>
-                    <input type="text" name="name" id="name" class="form-control" value="{{ old('name') ?: $piece->name }}" required minlength="1" maxlength="300" />
+                    <input type="text" name="name" id="name" class="form-control" value="{{ old('name') ?: $piece->name }}" required minlength="1" maxlength="255" />
                 </div>
 
                 <div class="form-group">
@@ -36,12 +36,12 @@
 
                 <div class="form-group">
                     <label for="genre">Žánr</label>
-                    <input type="text" name="genre" id="genre" class="form-control" value="{{ old('genre') ?: $piece->genre }}" minlength="1" maxlength="50" />
+                    <input type="text" name="genre" id="genre" class="form-control" value="{{ old('genre') ?: $piece->genre }}" minlength="1" maxlength="255" />
                 </div>
 
                 <div class="form-group">
                     <label for="performer">Účinkující</label>
-                    <input type="text" name="performer" id="performer" class="form-control" value="{{ old('performer') ?: $piece->performer }}" minlength="1" maxlength="500" />
+                    <input type="text" name="performer" id="performer" class="form-control" value="{{ old('performer') ?: $piece->performer }}" minlength="1" maxlength="255" />
                 </div>
 
                 <div class="form-group">
