@@ -148,7 +148,7 @@ class PerformanceController extends Controller
         foreach($request->input('hall') as $hall_id){
             $hall = Hall::find($hall_id);
             foreach($hall->performances as $perf){
-                if($request->input('date') == $perf->date){
+                if(($request->input('date') == $perf->date) && ($perf->id != $performance->id)){
                     $beginning = date('G:i', strtotime($perf->beginning));
                     $end = date('G:i', strtotime($perf->end));
 
