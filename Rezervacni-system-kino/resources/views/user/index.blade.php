@@ -13,7 +13,7 @@
                 <input type="text" id="searchUsers" onkeyup="searchTable()" placeholder="Hledejte v uživatelích...">
                 <br>
                 <br>
-                <table class="table table-striped table-bordered table-responsive-md">
+                <table id="users" class="table table-striped table-bordered table-responsive-md">
                     <thead>
                     <tr>
                         <th>Přijmení</th>
@@ -74,9 +74,9 @@
         function searchTable() {
 
             let input, filter, table, tr, td, i, j, cell;
-            input = document.getElementById("searchReservations");
+            input = document.getElementById("searchUsers");
             filter = input.value.toUpperCase();
-            table = document.getElementById("reservations");
+            table = document.getElementById("users");
             tr = table.getElementsByTagName("tr");
 
             for (i = 1; i < tr.length; i++) {
