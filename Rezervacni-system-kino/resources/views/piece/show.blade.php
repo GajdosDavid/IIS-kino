@@ -37,7 +37,7 @@
     </div>
     <div class="reservation-box">
         <div class="overview">
-            <h2 class="">Zarezervuje si sedadlo</h2>
+            <h2 class="">Zarezervujte si sedadlo</h2>
             <h5>Vyberte místo, kde chcete film zarezervovat</h5>
             <div class="cinema-dates flex-column">
                 <div class="cinemas flex-row">
